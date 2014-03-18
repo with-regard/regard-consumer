@@ -77,7 +77,7 @@ namespace WorkerRoleWithSBQueue1
             }
 
             // Create the processing pipeline
-            string storageConnectionString = CloudConfigurationManager.GetSetting("Microsoft.Storage.ConnectionString");
+            string storageConnectionString = CloudConfigurationManager.GetSetting("StorageConnectionString");
 
             // For now we're just storing the data in the table
             m_EventPipeline = new AzureTablePipeline(storageConnectionString);

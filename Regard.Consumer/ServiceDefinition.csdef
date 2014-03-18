@@ -6,7 +6,7 @@
     </Imports>
     <ConfigurationSettings>
       <Setting name="Microsoft.ServiceBus.ConnectionString" />
-      <Setting name="Microsoft.Storage.ConnectionString"/>
+      <Setting name="StorageConnectionString"/>
     </ConfigurationSettings>
   </WorkerRole>
 </ServiceDefinition>
