@@ -85,6 +85,9 @@ namespace WorkerRoleWithSBQueue1
             if (!regardNamespace.TopicExists(topic))
                 regardNamespace.CreateTopic(topic);
 
+            if (!regardNamespace.SubscriptionExists(topic, subscriptionName))
+                regardNamespace.CreateSubscription(topic, subscriptionName);
+
             // Create the subscription
             SubscriptionClient subscriptionClient = SubscriptionClient.CreateFromConnectionString(serviceBusConnectionString, topic, subscriptionName);
 
