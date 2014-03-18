@@ -5,7 +5,7 @@ VisualStudioVersion = 12.0.30110.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{CC5FD16D-436D-48AD-A40C-5A424C6E3E79}") = "Regard.Consumer", "Regard.Consumer\Regard.Consumer.ccproj", "{4208D285-01FE-4165-9D01-0CDB0D20F37A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkerRoleWithSBQueue1", "WorkerRoleWithSBQueue1\WorkerRoleWithSBQueue1.csproj", "{65063E9B-2335-456E-9C31-92F14DD98FBF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Regard.Consumer.BusWorker", "Regard.Consumer.BusWorker\Regard.Consumer.BusWorker.csproj", "{65063E9B-2335-456E-9C31-92F14DD98FBF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
