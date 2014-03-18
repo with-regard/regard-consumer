@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Table;
 using Regard.Consumer.Logic.Api;
@@ -50,6 +51,13 @@ namespace Regard.Consumer.Logic.Pipeline
                     Organization    = input.Organization,
                     Payload         = input.Payload
                 };
+
+            // Use the organisation/product as the partition key
+            entity.PartitionKey = input.Organization + "/" + input.Product;
+
+            // It's not clear at this point how we'll identify rows, so we're using a GUID as the row key for the moment
+            // TODO: I imagine that timestamp + serial or something similar would make sense here
+            entity.RowKey = Guid.NewGuid().ToString();
 
             // Store in the table
             var insertNewEvent = TableOperation.Insert(entity);
