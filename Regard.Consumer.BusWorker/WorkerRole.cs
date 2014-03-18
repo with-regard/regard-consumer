@@ -19,9 +19,7 @@ namespace WorkerRoleWithSBQueue1
         // The name of your queue
         const string QueueName = "ProcessingQueue";
 
-        // QueueClient is thread-safe. Recommended that you cache 
-        // rather than recreating it on every request
-        QueueClient Client;
+        SubscriptionClient Client;
         ManualResetEvent CompletedEvent = new ManualResetEvent(false);
 
         /// <summary>
@@ -69,21 +67,28 @@ namespace WorkerRoleWithSBQueue1
             ServicePointManager.DefaultConnectionLimit = 12;
 
             // Create the queue if it does not exist already
-            string connectionString = CloudConfigurationManager.GetSetting("Microsoft.ServiceBus.ConnectionString");
-            var namespaceManager = NamespaceManager.CreateFromConnectionString(connectionString);
-            if (!namespaceManager.QueueExists(QueueName))
-            {
-                namespaceManager.CreateQueue(QueueName);
-            }
+            string serviceBusConnectionString   = CloudConfigurationManager.GetSetting("Regard.ServiceBus.ConnectionString");
+            string topic                        = CloudConfigurationManager.GetSetting("Regard.ServiceBus.EventTopic");
+            string subscriptionName             = CloudConfigurationManager.GetSetting("Regard.ServiceBus.SubscriptionName");
+
+            // Get the namespace for the queue
+            var regardNamespace = NamespaceManager.CreateFromConnectionString(serviceBusConnectionString);
+
+            // Create the topic if it doesn't already exist
+            if (!regardNamespace.TopicExists(topic))
+                regardNamespace.CreateTopic(topic);
+
+            // Create the subscription
+            SubscriptionClient subscriptionClient = SubscriptionClient.CreateFromConnectionString(serviceBusConnectionString, topic, subscriptionName);
 
             // Create the processing pipeline
-            string storageConnectionString = CloudConfigurationManager.GetSetting("StorageConnectionString");
+            string storageConnectionString = CloudConfigurationManager.GetSetting("Regard.Storage.ConnectionString");
 
             // For now we're just storing the data in the table
             m_EventPipeline = new AzureTablePipeline(storageConnectionString);
 
             // Initialize the connection to Service Bus Queue
-            Client = QueueClient.CreateFromConnectionString(connectionString, QueueName);
+            Client = subscriptionClient;
             return base.OnStart();
         }
 

@@ -5,8 +5,10 @@
       <Import moduleName="Diagnostics" />
     </Imports>
     <ConfigurationSettings>
-      <Setting name="Microsoft.ServiceBus.ConnectionString" />
-      <Setting name="StorageConnectionString"/>
+      <Setting name="Regard.ServiceBus.ConnectionString" />
+      <Setting name="Regard.ServiceBus.EventTopic"/>
+      <Setting name="Regard.ServiceBus.SubscriptionName"/>
+      <Setting name="Regard.Storage.ConnectionString"/>
     </ConfigurationSettings>
   </WorkerRole>
 </ServiceDefinition>
