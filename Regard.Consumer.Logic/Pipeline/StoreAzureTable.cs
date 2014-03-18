@@ -53,10 +53,12 @@ namespace Regard.Consumer.Logic.Pipeline
                 };
 
             // Use the organisation/product as the partition key
+            // TODO: '/' is an invalid character in the partition key. I can't find where azure documents what goes here; the docs for TableEntity helpfully state that this contains the partition key and nothing else
             entity.PartitionKey = input.Organization + "/" + input.Product;
 
             // It's not clear at this point how we'll identify rows, so we're using a GUID as the row key for the moment
             // TODO: I imagine that timestamp + serial or something similar would make sense here
+            // TODO: partition keys can only contain certain characters, it seems likely that row keys have the same limitations
             entity.RowKey = Guid.NewGuid().ToString();
 
             // Store in the table
