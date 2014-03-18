@@ -40,7 +40,7 @@ namespace Regard.Consumer.Logic.Pipeline
                 return input.WithError("Event has no product");
             }
 
-            if (!inputData.TryGetValue("version", out version))
+            if (!inputData.TryGetValue("schema_version", out version))
             {
                 return input.WithError("Event has no version");
             }
