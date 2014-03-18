@@ -29,12 +29,12 @@ namespace Regard.Consumer.Logic.Pipeline
         /// </summary>
         private readonly CloudTable m_Table;
 
-        public StoreAzureTable(string connectionString)
+        public StoreAzureTable(string connectionString, string tableName)
         {
             // Setup
             m_StorageAccount    = CloudStorageAccount.Parse(connectionString);
             m_TableClient       = m_StorageAccount.CreateCloudTableClient();
-            m_Table             = m_TableClient.GetTableReference("flateventstorage");
+            m_Table             = m_TableClient.GetTableReference(tableName);
             m_Table.CreateIfNotExists();
         }
 

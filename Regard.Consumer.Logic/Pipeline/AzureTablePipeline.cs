@@ -13,13 +13,13 @@ namespace Regard.Consumer.Logic.Pipeline
         /// <summary>
         /// Creates a new table pipeline
         /// </summary>
-        public AzureTablePipeline(string storageConnectionString)
+        public AzureTablePipeline(string storageConnectionString, string storageTableName)
         {
             var decompose       = new DecomposeStage();
             var checkOrg        = new CheckOrganization();
             var checkProduct    = new CheckProduct();
             var checkUser       = new CheckUser();
-            var storeInTable    = new StoreAzureTable(storageConnectionString);
+            var storeInTable    = new StoreAzureTable(storageConnectionString, storageTableName);
 
             m_Stages = new IPipelineStage[] {decompose, checkOrg, checkProduct, checkUser, storeInTable};
         }

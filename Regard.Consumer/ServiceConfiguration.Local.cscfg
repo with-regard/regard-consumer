@@ -8,6 +8,7 @@
       <Setting name="Regard.ServiceBus.EventTopic" value="analytics-topic"/>
       <Setting name="Regard.ServiceBus.SubscriptionName" value="regard-event-consumer"/>
       <Setting name="Regard.Storage.ConnectionString" value="UseDevelopmentStorage=true" />
+      <Setting name="Regard.Storage.EventTable" value="flateventstorage" />
     </ConfigurationSettings>
   </Role>
 </ServiceConfiguration>

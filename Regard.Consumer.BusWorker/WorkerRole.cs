@@ -67,10 +67,11 @@ namespace WorkerRoleWithSBQueue1
             ServicePointManager.DefaultConnectionLimit = 12;
 
             // Create the processing pipeline
-            string storageConnectionString = CloudConfigurationManager.GetSetting("Regard.Storage.ConnectionString");
+            string storageConnectionString  = CloudConfigurationManager.GetSetting("Regard.Storage.ConnectionString");
+            string storageTableName         = CloudConfigurationManager.GetSetting("Regard.Storage.EventTable");
 
             // For now we're just storing the data in the table
-            m_EventPipeline = new AzureTablePipeline(storageConnectionString);
+            m_EventPipeline = new AzureTablePipeline(storageConnectionString, storageTableName);
 
             // Create the queue if it does not exist already
             string serviceBusConnectionString   = CloudConfigurationManager.GetSetting("Regard.ServiceBus.ConnectionString");
