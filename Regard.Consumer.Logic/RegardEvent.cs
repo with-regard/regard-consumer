@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Regard.Consumer.Logic.Api;
 
 namespace Regard.Consumer.Logic
@@ -8,17 +9,17 @@ namespace Regard.Consumer.Logic
     /// </summary>
     public class RegardEvent : IRegardEvent
     {
+        /// <summary>
+        /// The events in this object
+        /// </summary>
+        private readonly Dictionary<string, string> m_Values = new Dictionary<string, string>();
+
         private RegardEvent()
         {
-            RawData         = null;
-            Payload         = null;
-            Organization    = null;
-            Product         = null;
-            Error           = null;
         }
 
         /// <summary>
-        /// Creates a new event with some raw data
+        /// Creates a new event
         /// </summary>
         public static IRegardEvent Create(string rawData)
         {
@@ -26,101 +27,37 @@ namespace Regard.Consumer.Logic
         }
 
         /// <summary>
-        /// Creates an updated version of this event
+        /// Returns the value of a particular key
         /// </summary>
-        private IRegardEvent With(Action<RegardEvent> updateEvent)
+        public string this[string key]
+        {
+            get
+            {
+                string result;
+                if (m_Values.TryGetValue(key, out result))
+                {
+                    return result;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Returns an event identical to this one, except that the specified key is given the specified value
+        /// </summary>
+        public IRegardEvent With(string key, string value)
         {
             var newEvent = new RegardEvent();
+            foreach (var kvPair in m_Values)
+            {
+                newEvent.m_Values.Add(kvPair.Key, kvPair.Value);
+            }
+            newEvent.m_Values[key] = value;
 
-            newEvent.RawData        = RawData;
-            newEvent.Payload        = Payload;
-            newEvent.Organization   = Organization;
-            newEvent.Product        = Product;
-            newEvent.Error          = Error;
-
-            updateEvent(newEvent);
             return newEvent;
-        }
-
-        /// <summary>
-        /// The organization for this event. This should be null if no organisation is known yet, or a JSON encoded string
-        /// </summary>
-        public string Organization
-        {
-            get; private set;
-        }
-
-        /// <summary>
-        /// The payload for this event. This should be null if no payload has been extracted yet, or a JSON encoded string.
-        /// </summary>
-        public string Payload
-        {
-            get; private set;
-        }
-
-        /// <summary>
-        /// The product for this event. This should be null if no organisation is known yet, or a JSON encoded string
-        /// </summary>
-        public string Product
-        {
-            get; private set;
-        }
-
-        /// <summary>
-        /// The raw data for this event. This should be a JSON encoded string, or null if no raw data has been extracted from this event yet.
-        /// </summary>
-        public string RawData
-        {
-            get; private set;
-        }
-
-        /// <summary>
-        /// null, or a description of a reason why this event could not be processed. The pipeline will stop processing when an
-        /// event acquires an error.
-        /// </summary>
-        public string Error
-        {
-            get; private set;
-        }
-
-        /// <summary>
-        /// New event with an error
-        /// </summary>
-        public IRegardEvent WithError(string message)
-        {
-            return With(newEvt => newEvt.Error = message);
-        }
-
-        /// <summary>
-        /// New event with an organisation
-        /// </summary>
-        public IRegardEvent WithOrganization(string data)
-        {
-            return With((newEvt) => newEvt.Organization = data);
-        }
-
-        /// <summary>
-        /// New event with a payload
-        /// </summary>
-        public IRegardEvent WithPayload(string data)
-        {
-            return With((newEvt) => newEvt.Payload = data);
-        }
-
-        /// <summary>
-        /// New event with a product
-        /// </summary>
-        public IRegardEvent WithProduct(string data)
-        {
-            return With((newEvt) => newEvt.Product = data);
-        }
-
-        /// <summary>
-        /// Event with some raw data
-        /// </summary>
-        public IRegardEvent WithRawData(string data)
-        { 
-            return With((newEvt) => newEvt.RawData = data);
         }
     }
 }

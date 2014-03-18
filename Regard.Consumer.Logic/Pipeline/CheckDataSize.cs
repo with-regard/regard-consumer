@@ -27,13 +27,13 @@ namespace Regard.Consumer.Logic.Pipeline
         /// </summary>
         public async Task<IRegardEvent> Process(IRegardEvent input)
         {
-            if (input.Payload != null && input.Payload.Length > c_MaxCharacters)
+            if (input.Payload() != null && input.Payload().Length > c_MaxCharacters)
             {
                 return input.WithError("Event payload is too long");
             }
 
-            var sanitisedProduct    = StorageUtil.SanitiseKey(input.Product);
-            var sanitisedOrg        = StorageUtil.SanitiseKey(input.Organization);
+            var sanitisedProduct    = StorageUtil.SanitiseKey(input.Product());
+            var sanitisedOrg        = StorageUtil.SanitiseKey(input.Organization());
             if (sanitisedProduct != null && sanitisedProduct.Length > c_MaxIdentifier)
             {
                 return input.WithError("Product name is too long");

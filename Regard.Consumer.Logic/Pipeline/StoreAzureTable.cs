@@ -47,13 +47,13 @@ namespace Regard.Consumer.Logic.Pipeline
             // Generate the entity
             var entity = new FlatEventEntity
                 {
-                    Product         = input.Product,
-                    Organization    = input.Organization,
-                    Payload         = input.Payload
+                    Product         = input.Product(),
+                    Organization    = input.Organization(),
+                    Payload         = input.Payload()
                 };
 
             // Use the organisation/product as the partition key
-            entity.PartitionKey = StorageUtil.SanitiseKey(input.Organization + "/" + input.Product);
+            entity.PartitionKey = StorageUtil.SanitiseKey(input.Organization() + "/" + input.Product());
 
             // It's not clear at this point how we'll identify rows, so we're using a GUID as the row key for the moment
             // TODO: I imagine that timestamp + serial or something similar would make sense here

@@ -46,10 +46,10 @@ namespace WorkerRoleWithSBQueue1
                         var processedEvent = await m_EventPipeline.Process(RegardEvent.Create(rawMessage));
 
                         // Report any errors to the trace
-                        if (processedEvent.Error != null)
+                        if (processedEvent.Error() != null)
                         {
                             // TODO: protect against bad event spamming
-                            Trace.TraceError("Rejected event: {0}", processedEvent.Error);
+                            Trace.TraceError("Rejected event: {0}", processedEvent.Error());
                         }
 
                         // Complete the message

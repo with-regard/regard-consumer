@@ -60,6 +60,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Api\EventKeys.cs" />
     <Compile Include="Api\IPipeline.cs" />
     <Compile Include="Api\IPipelineStage.cs" />
     <Compile Include="Api\IRegardEvent.cs" />

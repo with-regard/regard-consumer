@@ -34,7 +34,7 @@ namespace Regard.Consumer.Logic.Pipeline
                     // Oops, broken stage
                     return RegardEvent.Create(null).WithError("Pipeline stage returned null");
                 }
-                else if (!string.IsNullOrEmpty(currentEvent.Error))
+                else if (!string.IsNullOrEmpty(currentEvent.Error()))
                 {
                     // Stop if there's an error
                     return currentEvent;

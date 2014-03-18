@@ -20,7 +20,7 @@ namespace Regard.Consumer.Logic.Pipeline
             JObject inputData;
             try
             {
-                inputData = JObject.Parse(input.RawData);
+                inputData = JObject.Parse(input.RawData());
             }
             catch (JsonException e)
             {
@@ -61,7 +61,8 @@ namespace Regard.Consumer.Logic.Pipeline
             // Create the result
             return input.WithOrganization(organization.ToString())
                         .WithPayload(payload.ToString())
-                        .WithProduct(product.ToString());
+                        .WithProduct(product.ToString())
+                        .WithVersion(version.ToString());
         }
     }
 }
