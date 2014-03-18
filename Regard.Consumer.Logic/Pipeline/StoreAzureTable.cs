@@ -34,7 +34,7 @@ namespace Regard.Consumer.Logic.Pipeline
             // Setup
             m_StorageAccount    = CloudStorageAccount.Parse(connectionString);
             m_TableClient       = m_StorageAccount.CreateCloudTableClient();
-            m_Table             = m_TableClient.GetTableReference("flat-event-storage");
+            m_Table             = m_TableClient.GetTableReference("flateventstorage");
             m_Table.CreateIfNotExists();
         }
 
