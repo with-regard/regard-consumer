@@ -26,6 +26,12 @@
         string Product { get; }
 
         /// <summary>
+        /// null, or a description of a reason why this event could not be processed. The pipeline will stop processing when an
+        /// event acquires an error.
+        /// </summary>
+        string Error { get; }
+
+        /// <summary>
         /// Event with some raw data
         /// </summary>
         IRegardEvent WithRawData(string data);
@@ -44,5 +50,10 @@
         /// New event with a product
         /// </summary>
         IRegardEvent WithProduct(string data);
+
+        /// <summary>
+        /// New event with an error
+        /// </summary>
+        IRegardEvent WithError(string message);
     }
 }

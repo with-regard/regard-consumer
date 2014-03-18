@@ -4,7 +4,7 @@ using Regard.Consumer.Logic.Api;
 namespace Regard.Consumer.Logic
 {
     /// <summary>
-    /// C
+    /// Class representing an event
     /// </summary>
     public class RegardEvent : IRegardEvent
     {
@@ -14,6 +14,7 @@ namespace Regard.Consumer.Logic
             Payload         = null;
             Organization    = null;
             Product         = null;
+            Error           = null;
         }
 
         /// <summary>
@@ -24,6 +25,9 @@ namespace Regard.Consumer.Logic
             return new RegardEvent().WithRawData(rawData);
         }
 
+        /// <summary>
+        /// Creates an updated version of this event
+        /// </summary>
         private IRegardEvent With(Action<RegardEvent> updateEvent)
         {
             var newEvent = new RegardEvent();
@@ -32,6 +36,7 @@ namespace Regard.Consumer.Logic
             newEvent.Payload        = Payload;
             newEvent.Organization   = Organization;
             newEvent.Product        = Product;
+            newEvent.Error          = Error;
 
             updateEvent(newEvent);
             return newEvent;
@@ -67,6 +72,23 @@ namespace Regard.Consumer.Logic
         public string RawData
         {
             get; private set;
+        }
+
+        /// <summary>
+        /// null, or a description of a reason why this event could not be processed. The pipeline will stop processing when an
+        /// event acquires an error.
+        /// </summary>
+        public string Error
+        {
+            get; private set;
+        }
+
+        /// <summary>
+        /// New event with an error
+        /// </summary>
+        public IRegardEvent WithError(string message)
+        {
+            return With(newEvt => newEvt.Error = message);
         }
 
         /// <summary>
