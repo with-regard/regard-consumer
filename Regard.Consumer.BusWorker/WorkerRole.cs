@@ -51,10 +51,14 @@ namespace WorkerRoleWithSBQueue1
                             // TODO: protect against bad event spamming
                             Trace.TraceError("Rejected event: {0}", processedEvent.Error);
                         }
+
+                        // Complete the message
+                        await receivedMessage.CompleteAsync();
                     }
-                    catch
+                    catch (Exception e)
                     {
                         // Handle any message processing specific exceptions here
+                        Trace.TraceError("Exception during event processing: {0}", e.Message);
                     }
                 });
 
