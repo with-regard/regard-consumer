@@ -7,6 +7,10 @@ Project("{CC5FD16D-436D-48AD-A40C-5A424C6E3E79}") = "Regard.Consumer", "Regard.C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Regard.Consumer.BusWorker", "Regard.Consumer.BusWorker\Regard.Consumer.BusWorker.csproj", "{65063E9B-2335-456E-9C31-92F14DD98FBF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Regard.Consumer.Logic", "Regard.Consumer.Logic\Regard.Consumer.Logic.csproj", "{884EB5FD-5287-4B2E-A9DD-57E8EFA10BC1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Regard.Consumer.Tests", "Regard.Consumer.Tests\Regard.Consumer.Tests.csproj", "{3BFA6B3E-386D-410B-9903-4C5BA34BD5B5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{65063E9B-2335-456E-9C31-92F14DD98FBF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{65063E9B-2335-456E-9C31-92F14DD98FBF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{65063E9B-2335-456E-9C31-92F14DD98FBF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{884EB5FD-5287-4B2E-A9DD-57E8EFA10BC1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{884EB5FD-5287-4B2E-A9DD-57E8EFA10BC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{884EB5FD-5287-4B2E-A9DD-57E8EFA10BC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{884EB5FD-5287-4B2E-A9DD-57E8EFA10BC1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3BFA6B3E-386D-410B-9903-4C5BA34BD5B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3BFA6B3E-386D-410B-9903-4C5BA34BD5B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3BFA6B3E-386D-410B-9903-4C5BA34BD5B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3BFA6B3E-386D-410B-9903-4C5BA34BD5B5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -74,6 +74,12 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Regard.Consumer.Logic\Regard.Consumer.Logic.csproj">
+      <Project>{884eb5fd-5287-4b2e-a9dd-57e8efa10bc1}</Project>
+      <Name>Regard.Consumer.Logic</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
