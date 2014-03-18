@@ -46,6 +46,9 @@
     <Compile Include="Api\IPipeline.cs" />
     <Compile Include="Api\IPipelineStage.cs" />
     <Compile Include="Api\IRegardEvent.cs" />
+    <Compile Include="Pipeline\CheckOrganization.cs" />
+    <Compile Include="Pipeline\CheckProduct.cs" />
+    <Compile Include="Pipeline\CheckUser.cs" />
     <Compile Include="Pipeline\DecomposeStage.cs" />
     <Compile Include="Pipeline\ProcessPipeline.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
