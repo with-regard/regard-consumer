@@ -94,7 +94,7 @@ namespace Regard.Consumer.Logic
         /// <summary>
         /// New event with an organisation
         /// </summary>
-        public IRegardEvent WithOrganisation(string data)
+        public IRegardEvent WithOrganization(string data)
         {
             return With((newEvt) => newEvt.Organization = data);
         }

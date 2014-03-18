@@ -13,11 +13,17 @@ namespace Regard.Consumer.Logic.Pipeline
         /// </summary>
         public static async Task<IRegardEvent> Process(this IPipeline pipeline, IRegardEvent input)
         {
+            // Sanity check
+            if (pipeline == null)
+            {
+                return RegardEvent.Create(null).WithError("No pipeline");
+            }
             if (input == null)
             {
                 return RegardEvent.Create(null).WithError("No input event");
             }
 
+            // Process the stages in the pipeline
             var currentEvent = input;
             foreach (var stage in pipeline.Stages)
             {
@@ -30,6 +36,7 @@ namespace Regard.Consumer.Logic.Pipeline
                 }
                 else if (!string.IsNullOrEmpty(currentEvent.Error))
                 {
+                    // Stop if there's an error
                     return currentEvent;
                 }
             }

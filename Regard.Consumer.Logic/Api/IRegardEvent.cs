@@ -44,7 +44,7 @@
         /// <summary>
         /// New event with an organisation
         /// </summary>
-        IRegardEvent WithOrganisation(string data);
+        IRegardEvent WithOrganization(string data);
 
         /// <summary>
         /// New event with a product
