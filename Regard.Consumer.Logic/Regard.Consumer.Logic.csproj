@@ -73,6 +73,7 @@
     <Compile Include="Pipeline\StoreAzureTable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegardEvent.cs" />
+    <Compile Include="StorageUtil.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
