@@ -66,6 +66,12 @@ namespace WorkerRoleWithSBQueue1
             // Set the maximum number of concurrent connections 
             ServicePointManager.DefaultConnectionLimit = 12;
 
+            // Create the processing pipeline
+            string storageConnectionString = CloudConfigurationManager.GetSetting("Regard.Storage.ConnectionString");
+
+            // For now we're just storing the data in the table
+            m_EventPipeline = new AzureTablePipeline(storageConnectionString);
+
             // Create the queue if it does not exist already
             string serviceBusConnectionString   = CloudConfigurationManager.GetSetting("Regard.ServiceBus.ConnectionString");
             string topic                        = CloudConfigurationManager.GetSetting("Regard.ServiceBus.EventTopic");
@@ -80,12 +86,6 @@ namespace WorkerRoleWithSBQueue1
 
             // Create the subscription
             SubscriptionClient subscriptionClient = SubscriptionClient.CreateFromConnectionString(serviceBusConnectionString, topic, subscriptionName);
-
-            // Create the processing pipeline
-            string storageConnectionString = CloudConfigurationManager.GetSetting("Regard.Storage.ConnectionString");
-
-            // For now we're just storing the data in the table
-            m_EventPipeline = new AzureTablePipeline(storageConnectionString);
 
             // Initialize the connection to Service Bus Queue
             Client = subscriptionClient;
