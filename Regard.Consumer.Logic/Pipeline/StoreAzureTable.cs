@@ -29,7 +29,7 @@ namespace Regard.Consumer.Logic.Pipeline
         /// </summary>
         private readonly CloudTable m_Table;
 
-        StoreAzureTable(string connectionString)
+        public StoreAzureTable(string connectionString)
         {
             // Setup
             m_StorageAccount    = CloudStorageAccount.Parse(connectionString);
