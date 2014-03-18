@@ -16,6 +16,8 @@ namespace Regard.Consumer.Logic
         /// </summary>
         public static string SanitiseKey(string key)
         {
+            if (key == null) return null;
+
             return Regex.Replace(key, c_InvalidChars, match =>
                 {
                     StringBuilder result = new StringBuilder();

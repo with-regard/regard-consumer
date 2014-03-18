@@ -16,12 +16,13 @@ namespace Regard.Consumer.Logic.Pipeline
         public AzureTablePipeline(string storageConnectionString, string storageTableName)
         {
             var decompose       = new DecomposeStage();
+            var checkSize       = new CheckDataSize();
             var checkOrg        = new CheckOrganization();
             var checkProduct    = new CheckProduct();
             var checkUser       = new CheckUser();
             var storeInTable    = new StoreAzureTable(storageConnectionString, storageTableName);
 
-            m_Stages = new IPipelineStage[] {decompose, checkOrg, checkProduct, checkUser, storeInTable};
+            m_Stages = new IPipelineStage[] {decompose, checkSize, checkOrg, checkProduct, checkUser, storeInTable};
         }
 
         /// <summary>
