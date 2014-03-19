@@ -8,8 +8,8 @@
     <ProjectGuid>{65063E9B-2335-456E-9C31-92F14DD98FBF}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WorkerRoleWithSBQueue1</RootNamespace>
-    <AssemblyName>WorkerRoleWithSBQueue1</AssemblyName>
+    <RootNamespace>RegardConsumerRole</RootNamespace>
+    <AssemblyName>RegardConsumerRole</AssemblyName>
     <ProjectTypeGuids>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <RoleType>Worker</RoleType>

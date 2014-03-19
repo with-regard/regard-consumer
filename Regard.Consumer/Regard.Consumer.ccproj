@@ -38,19 +38,19 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Regard.Consumer.BusWorker\Regard.Consumer.BusWorker.csproj">
-      <Name>WorkerRoleWithSBQueue1</Name>
+      <Name>RegardConsumerRole</Name>
       <Project>{65063e9b-2335-456e-9c31-92f14dd98fbf}</Project>
       <Private>True</Private>
       <RoleType>Worker</RoleType>
-      <RoleName>WorkerRoleWithSBQueue1</RoleName>
+      <RoleName>RegardConsumerRole</RoleName>
       <UpdateDiagnosticsConnectionStringOnPublish>True</UpdateDiagnosticsConnectionStringOnPublish>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="WorkerRoleWithSBQueue1Content\" />
+    <Folder Include="RegardConsumerContent\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="WorkerRoleWithSBQueue1Content\diagnostics.wadcfg">
+    <Content Include="RegardConsumerContent\diagnostics.wadcfg">
       <SubType>Content</SubType>
     </Content>
   </ItemGroup>
