@@ -35,9 +35,6 @@ namespace Regard.Consumer.BusWorker
                 {
                     try
                     {
-                        // Process the message
-                        Trace.WriteLine("Processing Service Bus message: " + receivedMessage.SequenceNumber.ToString());
-
                         // Message data is a JSON string
                         var rawMessage = receivedMessage.GetBody<string>();
 
@@ -48,6 +45,9 @@ namespace Regard.Consumer.BusWorker
                         if (processedEvent.Error() != null)
                         {
                             // TODO: protect against bad event spamming
+                            // Not clear how we want to do this at the moment. The endpoint should probably reject these events to stop them
+                            // occupying too many resources, so this part should probably send a message back when it wants a source to be
+                            // rejected.
                             Trace.TraceError("Rejected event: {0}", processedEvent.Error());
                         }
 
@@ -58,6 +58,8 @@ namespace Regard.Consumer.BusWorker
                     {
                         // Handle any message processing specific exceptions here
                         Trace.TraceError("Exception during event processing: {0}", e.Message);
+
+                        // TODO: the endpoint should timeout or reject any event source that causes an exception here in order to maintain quality of service
                     }
                 });
 
@@ -88,10 +90,10 @@ namespace Regard.Consumer.BusWorker
             if (!regardNamespace.TopicExists(topic))
                 regardNamespace.CreateTopic(topic);
 
+            // Create the subscription
             if (!regardNamespace.SubscriptionExists(topic, subscriptionName))
                 regardNamespace.CreateSubscription(topic, subscriptionName);
 
-            // Create the subscription
             SubscriptionClient subscriptionClient = SubscriptionClient.CreateFromConnectionString(serviceBusConnectionString, topic, subscriptionName);
 
             // Initialize the connection to Service Bus Queue
