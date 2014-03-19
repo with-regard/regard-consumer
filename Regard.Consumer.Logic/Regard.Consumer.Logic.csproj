@@ -74,6 +74,7 @@
     <Compile Include="Pipeline\DecomposeStage.cs" />
     <Compile Include="Pipeline\AzureTablePipeline.cs" />
     <Compile Include="Pipeline\ProcessPipeline.cs" />
+    <Compile Include="Pipeline\SimplePipeline.cs" />
     <Compile Include="Pipeline\StoreAzureTable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegardEvent.cs" />

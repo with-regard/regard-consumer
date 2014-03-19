@@ -10,6 +10,7 @@ namespace Regard.Consumer.Tests.Events
         [Test]
         public static void CanCreate()
         {
+            // Can create an event
             var evt = RegardEvent.Create("Test");
             Assert.IsNotNull(evt);
         }
@@ -17,6 +18,7 @@ namespace Regard.Consumer.Tests.Events
         [Test]
         public static void RetrieveRawData()
         {
+            // Can retrieve the raw data used when creating the object
             var evt = RegardEvent.Create("Test");
             Assert.AreEqual("Test", evt.RawData());
         }
@@ -24,6 +26,7 @@ namespace Regard.Consumer.Tests.Events
         [Test]
         public static void RetrieveArbitraryData()
         {
+            // Can write to any key
             var evt = RegardEvent.Create("Test");
             evt = evt.With("Test.Arbitrary", "Arbitrary");
             Assert.IsNotNull(evt);
@@ -31,8 +34,16 @@ namespace Regard.Consumer.Tests.Events
         }
 
         [Test]
+        public static void DefaultValueIsNull()
+        {
+            var evt = RegardEvent.Create("Test");
+            Assert.AreEqual(null, evt["Test.Arbitrary"]);
+        }
+
+        [Test]
         public static void DistinctFields()
         {
+            // Ensure that field data actually is stored and is retrievable from arbitrary keys
             var evt = RegardEvent.Create("Test");
             evt = evt.WithPayload("TestPayload");
             evt = evt.WithOrganization("TestOrg");
@@ -49,12 +60,25 @@ namespace Regard.Consumer.Tests.Events
         [Test]
         public static void Immutable()
         {
+            // Calling 'With' should create a new object with the new values and not update the old one
             var evt = RegardEvent.Create("Test");
             var evt2 = evt.WithRawData("Different");
 
             Assert.IsNotNull(evt2);
             Assert.AreEqual("Test", evt.RawData());
             Assert.AreEqual("Different", evt2.RawData());
+        }
+
+        [Test]
+        public static void ImmutableForNonexistent()
+        {
+            // Fields should remain null after a 'with'
+            var evt = RegardEvent.Create("Test");
+            var evt2 = evt.With("Test.Arbitrary", "Arbitrary");
+
+            Assert.IsNotNull(evt2);
+            Assert.IsNull(evt["Test.Arbitrary"]);
+            Assert.AreEqual("Arbitrary", evt2["Test.Arbitrary"]);
         }
     }
 }

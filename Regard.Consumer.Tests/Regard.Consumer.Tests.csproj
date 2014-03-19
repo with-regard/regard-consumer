@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Events\TestRegardEvent.cs" />
+    <Compile Include="Pipeline\TestPipeline.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -51,7 +52,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="PipelineStages\" />
-    <Folder Include="Pipeline\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Regard.Consumer.Logic\Regard.Consumer.Logic.csproj">
