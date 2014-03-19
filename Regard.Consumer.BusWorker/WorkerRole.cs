@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.Net;
 using System.Threading;
 using Microsoft.ServiceBus;
@@ -13,7 +11,7 @@ using Regard.Consumer.Logic.Api;
 using Regard.Consumer.Logic.Data;
 using Regard.Consumer.Logic.Pipeline;
 
-namespace WorkerRoleWithSBQueue1
+namespace Regard.Consumer.BusWorker
 {
     public class WorkerRole : RoleEntryPoint
     {
