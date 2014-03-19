@@ -4,7 +4,7 @@
     <Instances count="1" />
     <ConfigurationSettings>
       <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="UseDevelopmentStorage=true" />
-      <Setting name="Regard.ServiceBus.ConnectionString" value="UseDevelopmentStorage=true" />
+      <Setting name="Regard.ServiceBus.ConnectionString" value="Endpoint=sb://[your namespace].servicebus.windows.net;SharedSecretIssuer=owner;SharedSecretValue=[your secret]" />
       <Setting name="Regard.ServiceBus.EventTopic" value="analytics-topic"/>
       <Setting name="Regard.ServiceBus.SubscriptionName" value="regard-event-consumer"/>
       <Setting name="Regard.Storage.ConnectionString" value="UseDevelopmentStorage=true" />
