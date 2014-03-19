@@ -36,40 +36,5 @@ namespace Regard.Consumer.Tests.PipelineStages
             Assert.AreEqual("Regard Tests", entity.Product);
             Assert.IsNotNullOrEmpty(entity.Payload);
         }
-
-        [Test]
-        public async Task ErrorIfOrganizationTooLong()
-        {
-            var testTable = new TestTableTarget();
-            var input = RegardEvent.Create("Raw data shouldn't matter at this point");
-
-            // Create a populated event
-            var populated = input.WithOrganization(new string('x', 1024)).WithProduct("Regard Tests").WithPayload("{}");
-
-            // Try it out on the table storage stage
-            var stage = new StoreAzureTable(testTable);
-            var result = await stage.Process(populated);
-
-            Assert.IsNotNullOrEmpty(result.Error());
-            Assert.AreEqual(0, testTable.InsertedEntities.Count);
-        }
-
-
-        [Test]
-        public async Task ErrorIfProductTooLong()
-        {
-            var testTable = new TestTableTarget();
-            var input = RegardEvent.Create("Raw data shouldn't matter at this point");
-
-            // Create a populated event
-            var populated = input.WithOrganization("Red Gate Software Ltd").WithProduct(new string('x', 1024)).WithPayload("{}");
-
-            // Try it out on the table storage stage
-            var stage = new StoreAzureTable(testTable);
-            var result = await stage.Process(populated);
-
-            Assert.IsNotNullOrEmpty(result.Error());
-            Assert.AreEqual(0, testTable.InsertedEntities.Count);
-        }
     }
 }

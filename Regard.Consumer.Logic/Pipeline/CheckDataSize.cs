@@ -11,7 +11,7 @@ namespace Regard.Consumer.Logic.Pipeline
         /// <summary>
         /// The maximum number of characters that can be stored in any one event payload
         /// </summary>
-        private const int c_MaxCharacters = 4096;
+        public const int c_MaxCharacters = 4096;
 
         /// <summary>
         /// The maximum length of an identifier
@@ -20,7 +20,7 @@ namespace Regard.Consumer.Logic.Pipeline
         /// Partition keys have a limit of 1024 characters, so this is here to try to ensure that the string 'org/product' is never longer than this.
         /// This is checked post-sanitisation, so names using 'bad' characters will have a lower limit.
         /// </remarks>
-        private const int c_MaxIdentifier = 256;
+        public const int c_MaxIdentifier = 256;
 
         /// <summary>
         /// Causes this pipeline stage to process an event

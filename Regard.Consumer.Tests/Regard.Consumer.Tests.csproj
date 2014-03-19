@@ -60,6 +60,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PipelineStages\TestDataSize.cs" />
     <Compile Include="TestTableTarget.cs" />
     <Compile Include="Events\TestRegardEvent.cs" />
     <Compile Include="PipelineStages\TestDecompose.cs" />
