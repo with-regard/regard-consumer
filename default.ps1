@@ -8,14 +8,14 @@ function Get-ProgramFiles
     return "C:\Program Files"
 }
 
-function Get-AzureSDK 
+function Get-AzureSdkVisualStudioVersion
 {
     if (Test-Path (((Get-ProgramFiles) + "\MSBuild\Microsoft\VisualStudio\v11.0\Windows Azure Tools"))) {
-        return '4.0'
+        return '11.0'
     }
     
     if (Test-Path (((Get-ProgramFiles) + "\MSBuild\Microsoft\VisualStudio\v12.0\Windows Azure Tools"))) {
-        return '4.5.1'
+        return '12.0'
     }
 
     throw 'No known Azure SDK installed'
@@ -27,10 +27,11 @@ properties {
     $source_dir = "$base_dir\"
     $package_dir = "$base_dir\packages"
     $framework_dir =  (Get-ProgramFiles) + "\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0"
-    $config = "release"    
+    $config = "release"
+    $visualStudioVersion = Get-AzureSdkVisualStudioVersion
 }
 
-framework(Get-AzureSDK)
+framework('4.0')
 
 task default -depends package
 
@@ -38,12 +39,12 @@ task compile {
     "Compiling"
     "   Regard.Consumer.sln"
     
-    exec { msbuild $base_dir\Regard.Consumer.sln /p:Configuration=$config /verbosity:minimal /tv:4.0 }
+    exec { msbuild $base_dir\Regard.Consumer.sln /p:Configuration=$config /verbosity:minimal /tv:4.0 /p:VisualStudioVersion=$visualStudioVersion }
 }
 
 task package -depends compile {
     "Packaging"
     "   Regard.Consumer.sln"
 
-    exec { msbuild $base_dir\Regard.Consumer\Regard.Consumer.ccproj /t:Publish /p:Configuration=$config /verbosity:minimal /tv:4.0 }
+    exec { msbuild $base_dir\Regard.Consumer\Regard.Consumer.ccproj /t:Publish /p:Configuration=$config /verbosity:minimal /tv:4.0 /p:VisualStudioVersion=$visualStudioVersion }
 }
