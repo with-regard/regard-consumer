@@ -5,7 +5,7 @@ namespace Regard.Consumer.Logic.Data
     /// <summary>
     /// Flat representation of an event in the table
     /// </summary>
-    internal class FlatEventEntity : TableEntity
+    public class FlatEventEntity : TableEntity
     {
         /// <summary>
         /// The organisation that this event belongs to

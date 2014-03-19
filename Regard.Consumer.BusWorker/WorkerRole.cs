@@ -10,6 +10,7 @@ using Microsoft.WindowsAzure;
 using Microsoft.WindowsAzure.ServiceRuntime;
 using Regard.Consumer.Logic;
 using Regard.Consumer.Logic.Api;
+using Regard.Consumer.Logic.Data;
 using Regard.Consumer.Logic.Pipeline;
 
 namespace WorkerRoleWithSBQueue1
@@ -75,7 +76,7 @@ namespace WorkerRoleWithSBQueue1
             string storageTableName         = CloudConfigurationManager.GetSetting("Regard.Storage.EventTable");
 
             // For now we're just storing the data in the table
-            m_EventPipeline = new AzureTablePipeline(storageConnectionString, storageTableName);
+            m_EventPipeline = new AzureTablePipeline(new AzureFlatTableTarget(storageConnectionString, storageTableName));
 
             // Create the queue if it does not exist already
             string serviceBusConnectionString   = CloudConfigurationManager.GetSetting("Regard.ServiceBus.ConnectionString");
