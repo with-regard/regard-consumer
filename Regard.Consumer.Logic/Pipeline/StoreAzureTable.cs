@@ -11,7 +11,7 @@ namespace Regard.Consumer.Logic.Pipeline
     /// <remarks>
     /// This is mainly intended to demonstrate that we can store th
     /// </remarks>
-    class StoreAzureTable : IPipelineStage
+    public class StoreAzureTable : IPipelineStage
     {
         private readonly IFlatTableTarget m_Target;
 

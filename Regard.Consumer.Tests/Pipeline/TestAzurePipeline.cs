@@ -13,30 +13,6 @@ namespace Regard.Consumer.Tests.Pipeline
     public class TestAzurePipeline
     {
         /// <summary>
-        /// Table target that just stores a .NET list of entities that have been added
-        /// </summary>
-        class TestTableTarget : IFlatTableTarget
-        {
-            public TestTableTarget()
-            {
-                InsertedEntities = new List<ITableEntity>();
-            }
-
-            public List<ITableEntity> InsertedEntities
-            {
-                get; private set;
-            }
-
-            /// <summary>
-            /// Inserts an entity into this table
-            /// </summary>
-            public async Task Insert(ITableEntity entity)
-            {
-                InsertedEntities.Add(entity);
-            }
-        }
-
-        /// <summary>
         /// A very simple example of an event
         /// </summary>
         public const string c_TestRawData = "{\"schema_version\":256,\"organization\":\"Red Gate Software\",\"product\":\"Regard Tests\",\"payload\":{\"data\":\"something\"}}";
