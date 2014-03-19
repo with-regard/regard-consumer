@@ -15,28 +15,17 @@ namespace Regard.Consumer.Logic.Pipeline
     /// </remarks>
     class StoreAzureTable : IPipelineStage
     {
-        /// <summary>
-        /// The storage account that this will use
-        /// </summary>
-        private readonly CloudStorageAccount m_StorageAccount;
-
-        /// <summary>
-        /// The table client that we'll store data in
-        /// </summary>
-        private readonly CloudTableClient m_TableClient;
-
-        /// <summary>
-        /// The target table for this object
-        /// </summary>
-        private readonly CloudTable m_Table;
+        private readonly IFlatTableTarget m_Target;
 
         public StoreAzureTable(string connectionString, string tableName)
         {
-            // Setup
-            m_StorageAccount    = CloudStorageAccount.Parse(connectionString);
-            m_TableClient       = m_StorageAccount.CreateCloudTableClient();
-            m_Table             = m_TableClient.GetTableReference(tableName);
-            m_Table.CreateIfNotExists();
+            m_Target = new AzureFlatTableTarget(connectionString, tableName);
+        }
+
+        public StoreAzureTable(IFlatTableTarget target)
+        {
+            if (target == null) throw new ArgumentNullException("target");
+            m_Target = target;
         }
 
         /// <summary>
@@ -60,8 +49,7 @@ namespace Regard.Consumer.Logic.Pipeline
             entity.RowKey = StorageUtil.SanitiseKey(Guid.NewGuid().ToString());
 
             // Store in the table
-            var insertNewEvent = TableOperation.Insert(entity);
-            await m_Table.ExecuteAsync(insertNewEvent);
+            await m_Target.Insert(entity);
 
             // Done
             return input;
