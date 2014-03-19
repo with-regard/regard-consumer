@@ -9,7 +9,7 @@ namespace Regard.Consumer.Logic.Pipeline
     /// <summary>
     /// Pipeline stage that decomposes a raw message
     /// </summary>
-    class DecomposeStage : IPipelineStage
+    public class DecomposeStage : IPipelineStage
     {
         /// <summary>
         /// Causes this pipeline stage to process an event

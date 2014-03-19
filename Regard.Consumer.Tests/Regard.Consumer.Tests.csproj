@@ -61,6 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Events\TestRegardEvent.cs" />
+    <Compile Include="PipelineStages\TestDecompose.cs" />
     <Compile Include="Pipeline\TestAzurePipeline.cs" />
     <Compile Include="Pipeline\TestPipeline.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -68,9 +69,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="PipelineStages\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Regard.Consumer.Logic\Regard.Consumer.Logic.csproj">
       <Project>{884EB5FD-5287-4B2E-A9DD-57E8EFA10BC1}</Project>

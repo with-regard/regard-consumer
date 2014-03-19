@@ -6,7 +6,7 @@ namespace Regard.Consumer.Logic.Pipeline
     /// <summary>
     /// Checks that the product in an event is valid
     /// </summary>
-    class CheckProduct : IPipelineStage
+    public class CheckProduct : IPipelineStage
     {
         /// <summary>
         /// Causes this pipeline stage to process an event

@@ -6,7 +6,7 @@ namespace Regard.Consumer.Logic.Pipeline
     /// <summary>
     /// Checks that the organization in an event is valid
     /// </summary>
-    class CheckOrganization : IPipelineStage
+    public class CheckOrganization : IPipelineStage
     {
         /// <summary>
         /// Causes this pipeline stage to process an event
