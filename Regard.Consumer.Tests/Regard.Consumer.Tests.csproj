@@ -43,10 +43,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Events\TestRegardEvent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="PipelineStages\" />
+    <Folder Include="Pipeline\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Regard.Consumer.Logic\Regard.Consumer.Logic.csproj">
+      <Project>{884EB5FD-5287-4B2E-A9DD-57E8EFA10BC1}</Project>
+      <Name>Regard.Consumer.Logic</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
