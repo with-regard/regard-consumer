@@ -42,16 +42,18 @@ namespace Regard.Consumer.Tests.Pipeline
         }
 
         [Test]
-        public async Task ProcessTwoStages()
+        public async Task ProcessThreeStages()
         {
             var stage1 = new TestStage("Stage1");
             var stage2 = new TestStage("Stage2");
-            var pipeline = new SimplePipeline(new[] { stage1, stage2 });
+            var stage3 = new TestStage("Stage3");
+            var pipeline = new SimplePipeline(new[] { stage1, stage2, stage3 });
 
             var result = await pipeline.Process(RegardEvent.Create(""));
 
             Assert.AreEqual("OK", result["Stage1"]);
             Assert.AreEqual("OK", result["Stage2"]);
+            Assert.AreEqual("OK", result["Stage3"]);
         }
 
 
