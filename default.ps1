@@ -38,12 +38,12 @@ task compile {
     "Compiling"
     "   Regard.Consumer.sln"
     
-    exec { msbuild $base_dir\Regard.Consumer.sln /p:Configuration=$config /verbosity:minimal }
+    exec { msbuild $base_dir\Regard.Consumer.sln /p:Configuration=$config /verbosity:minimal /tv:4.0 }
 }
 
 task package -depends compile {
     "Packaging"
     "   Regard.Consumer.sln"
 
-    exec { msbuild $base_dir\Regard.Consumer\Regard.Consumer.ccproj /t:Publish /p:Configuration=$config /verbosity:minimal }
+    exec { msbuild $base_dir\Regard.Consumer\Regard.Consumer.ccproj /t:Publish /p:Configuration=$config /verbosity:minimal /tv:4.0 }
 }
