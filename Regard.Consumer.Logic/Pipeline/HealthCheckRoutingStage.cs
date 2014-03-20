@@ -13,12 +13,23 @@ namespace Regard.Consumer.Logic.Pipeline
     public class HealthCheckRoutingStage : IPipelineStage
     {
         /// <summary>
+        /// The organization that should be used for health check events
+        /// </summary>
+        public const string c_Organization = "RedGateSoftware";
+
+        /// <summary>
+        /// The product that should be used for health check events
+        /// </summary>
+        public const string c_Product = "HealthCheck";
+
+        /// <summary>
         /// The shared secret string, used to verify real health check packets
         /// </summary>
         private readonly string m_SharedSecret;
 
         public HealthCheckRoutingStage(string sharedSecret)
         {
+            m_SharedSecret = sharedSecret;
         }
 
         /// <summary>
@@ -27,7 +38,7 @@ namespace Regard.Consumer.Logic.Pipeline
         public async Task<IRegardEvent> Process(IRegardEvent input)
         {
             // Packet must be for the health check project
-            if (input.Organization() != "RedGateSoftware" || input.Product() != "HealthCheck")
+            if (input.Organization() != c_Organization || input.Product() != c_Product)
             {
                 return input;
             }
@@ -64,7 +75,7 @@ namespace Regard.Consumer.Logic.Pipeline
 
                 // Verify the signature
                 var rowKey          = rowKeyToken.Value<string>();
-                var rowKeySignature = rowKeyToken.Value<string>();
+                var rowKeySignature = rowKeySignatureToken.Value<string>();
 
                 if (string.IsNullOrEmpty(rowKey))
                 {
@@ -72,14 +83,13 @@ namespace Regard.Consumer.Logic.Pipeline
                     return input;
                 }
 
-
                 if (string.IsNullOrEmpty(rowKeySignature))
                 {
                     Trace.TraceError("HealthCheck: row key signature is empty");
                     return input;
                 }
 
-                var realSignature = SignatureUtil.Signature(rowKey, rowKeySignature);
+                var realSignature = SignatureUtil.Signature(rowKey, m_SharedSecret);
                 if (string.IsNullOrEmpty(realSignature))
                 {
                     Trace.TraceError("HealthCheck: could not verify signature");
