@@ -13,16 +13,17 @@ namespace Regard.Consumer.Logic.Pipeline
         /// <summary>
         /// Creates a new table pipeline
         /// </summary>
-        public AzureTablePipeline(IFlatTableTarget target)
+        public AzureTablePipeline(IFlatTableTarget target, string healthCheckSecret)
         {
             var decompose       = new DecomposeStage();
             var checkSize       = new CheckDataSize();
             var checkOrg        = new CheckOrganization();
             var checkProduct    = new CheckProduct();
             var checkUser       = new CheckUser();
+            var healthCheck     = new HealthCheckRoutingStage(healthCheckSecret);
             var storeInTable    = new StoreAzureTable(target);
 
-            m_Stages = new IPipelineStage[] {decompose, checkSize, checkOrg, checkProduct, checkUser, storeInTable};
+            m_Stages = new IPipelineStage[] {decompose, checkSize, checkOrg, checkProduct, checkUser, healthCheck, storeInTable};
         }
 
         /// <summary>

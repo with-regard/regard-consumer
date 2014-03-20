@@ -22,7 +22,7 @@ namespace Regard.Consumer.Tests.Pipeline
         {
             // More of an integration test than a unit test
             var tableTarget = new TestTableTarget();
-            var azurePipeline = new AzureTablePipeline(tableTarget);
+            var azurePipeline = new AzureTablePipeline(tableTarget, "TestHealthCheck");
 
             var input = RegardEvent.Create(c_TestRawData);
             var result = await azurePipeline.Process(input);

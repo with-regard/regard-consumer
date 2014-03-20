@@ -74,9 +74,10 @@ namespace Regard.Consumer.BusWorker
             // Create the processing pipeline
             string storageConnectionString  = CloudConfigurationManager.GetSetting("Regard.Storage.ConnectionString");
             string storageTableName         = CloudConfigurationManager.GetSetting("Regard.Storage.EventTable");
+            string healthCheckSecret        = CloudConfigurationManager.GetSetting("Regard.HealthCheck.SharedSecret");
 
             // For now we're just storing the data in the table
-            m_EventPipeline = new AzureTablePipeline(new AzureFlatTableTarget(storageConnectionString, storageTableName));
+            m_EventPipeline = new AzureTablePipeline(new AzureFlatTableTarget(storageConnectionString, storageTableName), healthCheckSecret);
 
             // Create the queue if it does not exist already
             string serviceBusConnectionString   = CloudConfigurationManager.GetSetting("Regard.ServiceBus.ConnectionString");
