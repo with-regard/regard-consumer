@@ -10,6 +10,7 @@
       <Setting name="Regard.ServiceBus.SubscriptionName"/>
       <Setting name="Regard.Storage.ConnectionString"/>
       <Setting name="Regard.Storage.EventTable"/>
+      <Setting name="Regard.HealthCheck.SharedSecret"/>
     </ConfigurationSettings>
   </WorkerRole>
 </ServiceDefinition>
