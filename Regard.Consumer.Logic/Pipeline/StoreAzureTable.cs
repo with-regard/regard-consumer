@@ -44,7 +44,16 @@ namespace Regard.Consumer.Logic.Pipeline
 
             // It's not clear at this point how we'll identify rows, so we're using a GUID as the row key for the moment
             // TODO: I imagine that timestamp + serial or something similar would make sense here
-            entity.RowKey = StorageUtil.SanitiseKey(Guid.NewGuid().ToString());
+
+            // Use the row key from the input
+            var rowKey = input[EventKeys.KeyRowKey];
+            if (string.IsNullOrEmpty(rowKey))
+            {
+                // If no row key is present, then use a GUID instead
+                rowKey = Guid.NewGuid().ToString();
+            }
+
+            entity.RowKey = StorageUtil.SanitiseKey(rowKey);
 
             // Store in the table
             await m_Target.Insert(entity);

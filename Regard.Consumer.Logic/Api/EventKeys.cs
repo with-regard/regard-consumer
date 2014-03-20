@@ -11,6 +11,7 @@
         public const string KeyPayload      = "Regard.Payload";
         public const string KeyVersion      = "Regard.Version";
         public const string KeyError        = "Regard.Error";
+        public const string KeyRowKey       = "Regard.RowKey";
 
         public static IRegardEvent WithRawData(this IRegardEvent oldEvent, string rawData)
         {
