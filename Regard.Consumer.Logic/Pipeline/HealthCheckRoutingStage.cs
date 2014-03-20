@@ -102,6 +102,9 @@ namespace Regard.Consumer.Logic.Pipeline
                     return input;
                 }
 
+                // Looks OK
+                Trace.WriteLine("HealthCheck: storing with row key {0}", rowKey);
+
                 // Set the row key in the result
                 var result = input.With(EventKeys.KeyRowKey, rowKey);
                 return result;
