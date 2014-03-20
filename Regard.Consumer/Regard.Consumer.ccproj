@@ -47,10 +47,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="RegardConsumerContent\" />
+    <Folder Include="RegardConsumerRoleContent" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="RegardConsumerContent\diagnostics.wadcfg">
+    <Content Include="RegardConsumerRoleContent\diagnostics.wadcfg">
       <SubType>Content</SubType>
     </Content>
   </ItemGroup>
