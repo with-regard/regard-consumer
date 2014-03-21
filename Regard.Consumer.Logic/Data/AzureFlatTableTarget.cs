@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Table;
 using Regard.Consumer.Logic.Api;
@@ -32,6 +33,14 @@ namespace Regard.Consumer.Logic.Data
             m_TableClient       = m_StorageAccount.CreateCloudTableClient();
             m_Table             = m_TableClient.GetTableReference(tableName);
             m_Table.CreateIfNotExists();
+        }
+
+        /// <summary>
+        /// Creates the table if it doesn't exist, and calls a function to populate it
+        /// </summary>
+        public Task CreateIfNeeded(Action createAction)
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>

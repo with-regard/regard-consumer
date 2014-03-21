@@ -67,6 +67,7 @@
     <Compile Include="Api\IRegardEvent.cs" />
     <Compile Include="Data\AzureFlatTableTarget.cs" />
     <Compile Include="Data\FlatEventEntity.cs" />
+    <Compile Include="Data\FlatOrganisationEntity.cs" />
     <Compile Include="Pipeline\CheckDataSize.cs" />
     <Compile Include="Pipeline\CheckEvent.cs" />
     <Compile Include="Pipeline\CheckOrganization.cs" />

@@ -21,8 +21,9 @@ namespace Regard.Consumer.Tests.Pipeline
         public async Task StoreOneEvent()
         {
             // More of an integration test than a unit test
-            var tableTarget = new TestTableTarget();
-            var azurePipeline = new AzureTablePipeline(tableTarget, "TestHealthCheck");
+            var eventTable = new TestTableTarget();
+            var customerTable = new TestTableTarget();
+            var azurePipeline = new AzureTablePipeline(eventTable, customerTable, "TestHealthCheck");
 
             var input = RegardEvent.Create(c_TestRawData);
             var result = await azurePipeline.Process(input);
@@ -31,10 +32,10 @@ namespace Regard.Consumer.Tests.Pipeline
             Assert.IsNullOrEmpty(result.Error());
 
             // Should have inserted one entity
-            Assert.AreEqual(1, tableTarget.InsertedEntities.Count);
+            Assert.AreEqual(1, eventTable.InsertedEntities.Count);
 
             // Should be a flat event entity
-            var entity = tableTarget.InsertedEntities[0] as FlatEventEntity;
+            var entity = eventTable.InsertedEntities[0] as FlatEventEntity;
             Assert.IsNotNull(entity);
 
             // Should have the values in the test data
