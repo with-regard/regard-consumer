@@ -15,5 +15,10 @@ namespace Regard.Consumer.Logic.Api
         /// Inserts an entity into this table
         /// </summary>
         Task Insert(ITableEntity entity);
+
+        /// <summary>
+        /// Returns null if no entity exists, otherwise the entity with a particular partition and row key
+        /// </summary>
+        Task<ITableEntity> Find(string partitionKey, string rowKey);
     }
 }
