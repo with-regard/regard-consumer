@@ -15,7 +15,7 @@ namespace Regard.Consumer.Tests.Pipeline
         /// <summary>
         /// A very simple example of an event
         /// </summary>
-        public const string c_TestRawData = "{\"schema_version\":256,\"organization\":\"Red Gate Software\",\"product\":\"Regard Tests\",\"payload\":{\"data\":\"something\"}}";
+        public const string c_TestRawData = "{\"schema_version\":256,\"organization\":\"WithRegard\",\"product\":\"Regard Tests\",\"payload\":{\"data\":\"something\"}}";
 
         [Test]
         public async Task StoreOneEvent()
@@ -39,7 +39,7 @@ namespace Regard.Consumer.Tests.Pipeline
             Assert.IsNotNull(entity);
 
             // Should have the values in the test data
-            Assert.AreEqual("Red Gate Software", entity.Organization);
+            Assert.AreEqual("WithRegard", entity.Organization);
             Assert.AreEqual("Regard Tests", entity.Product);
             Assert.IsNotNull(entity.PartitionKey);
             Assert.IsNotNull(entity.RowKey);
