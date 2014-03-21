@@ -33,7 +33,7 @@ namespace Regard.Consumer.Logic.Pipeline
             m_OrganizationTable = organizationTable;
             
             // Ensure that the 'WithRegard' organisation exists in the table
-            Task.Run(async () =>
+            var createTask = Task.Run(async () =>
                 {
                     var withRegard = await m_OrganizationTable.Find(c_OrganizationsPartition, StorageUtil.SanitiseKey(HealthCheckRoutingStage.c_Organization));
                     if (withRegard == null)
@@ -45,6 +45,8 @@ namespace Regard.Consumer.Logic.Pipeline
                         await m_OrganizationTable.Insert(newWithRegard);
                     }
                 });
+
+            createTask.Wait();
         }
 
         /// <summary>
