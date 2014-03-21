@@ -14,7 +14,7 @@ namespace Regard.Consumer.Logic.Pipeline
         /// <summary>
         /// The organization that should be used for health check events
         /// </summary>
-        public const string c_Organization = "RedGateSoftware";
+        public const string c_Organization = "WithRegard";
 
         /// <summary>
         /// The product that should be used for health check events
