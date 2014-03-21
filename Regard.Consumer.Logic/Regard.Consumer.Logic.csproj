@@ -68,6 +68,7 @@
     <Compile Include="Data\AzureFlatTableTarget.cs" />
     <Compile Include="Data\FlatEventEntity.cs" />
     <Compile Include="Pipeline\CheckDataSize.cs" />
+    <Compile Include="Pipeline\CheckEvent.cs" />
     <Compile Include="Pipeline\CheckOrganization.cs" />
     <Compile Include="Pipeline\CheckProduct.cs" />
     <Compile Include="Pipeline\CheckUser.cs" />

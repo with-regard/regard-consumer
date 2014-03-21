@@ -20,10 +20,11 @@ namespace Regard.Consumer.Logic.Pipeline
             var checkOrg        = new CheckOrganization();
             var checkProduct    = new CheckProduct();
             var checkUser       = new CheckUser();
+            var checkEvent      = new CheckEvent();
             var healthCheck     = new HealthCheckRoutingStage(healthCheckSecret);
             var storeInTable    = new StoreAzureTable(target);
 
-            m_Stages = new IPipelineStage[] {decompose, checkSize, checkOrg, checkProduct, checkUser, healthCheck, storeInTable};
+            m_Stages = new IPipelineStage[] {decompose, checkSize, checkOrg, checkProduct, checkUser, checkEvent, healthCheck, storeInTable};
         }
 
         /// <summary>
