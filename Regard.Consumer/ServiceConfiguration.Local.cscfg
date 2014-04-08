@@ -1,16 +1,16 @@
-<?xml version="1.0" encoding="utf-8"?>
-<ServiceConfiguration serviceName="Regard.Consumer" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceConfiguration" osFamily="4" osVersion="*" schemaVersion="2013-10.2.2">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ServiceConfiguration serviceName="Regard.Consumer" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceConfiguration" osFamily="4" osVersion="*" schemaVersion="2014-01.2.3">
   <Role name="RegardConsumerRole">
     <Instances count="1" />
     <ConfigurationSettings>
       <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="UseDevelopmentStorage=true" />
       <Setting name="Regard.ServiceBus.ConnectionString" value="Endpoint=sb://[your namespace].servicebus.windows.net;SharedSecretIssuer=owner;SharedSecretValue=[your secret]" />
-      <Setting name="Regard.ServiceBus.EventTopic" value="analytics-topic"/>
-      <Setting name="Regard.ServiceBus.SubscriptionName" value="regard-event-consumer"/>
+      <Setting name="Regard.ServiceBus.EventTopic" value="analytics-topic" />
+      <Setting name="Regard.ServiceBus.SubscriptionName" value="regard-event-consumer" />
       <Setting name="Regard.Storage.ConnectionString" value="UseDevelopmentStorage=true" />
       <Setting name="Regard.Storage.EventTable" value="flateventstorage" />
       <Setting name="Regard.Storage.CustomerTable" value="customers" />
-      <Setting name="Regard.HealthCheck.SharedSecret" value="[Secure random string]"/>
+      <Setting name="Regard.HealthCheck.SharedSecret" value="[Secure random string]" />
     </ConfigurationSettings>
   </Role>
 </ServiceConfiguration>
