@@ -1,5 +1,8 @@
 @echo off
 
+rem Set NuGetSources to something else if you want to use dependencies from a different server
+if "%NuGetSources%"=="" set NuGetSources=https://www.nuget.org/api/v2
+
 .nuget\NuGet.exe install .nuget\packages.config -OutputDirectory packages
 
 .nuget\NuGet.exe restore Regard.Consumer.sln
