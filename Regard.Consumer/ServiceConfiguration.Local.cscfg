@@ -10,6 +10,7 @@
       <Setting name="Regard.Storage.ConnectionString" value="UseDevelopmentStorage=true" />
       <Setting name="Regard.Storage.EventTable" value="flateventstorage" />
       <Setting name="Regard.Storage.CustomerTable" value="customers" />
+      <Setting name="Regard.Storage.SqlConnectionString" value=""/>
       <Setting name="Regard.HealthCheck.SharedSecret" value="[Secure random string]"/>
     </ConfigurationSettings>
   </Role>
