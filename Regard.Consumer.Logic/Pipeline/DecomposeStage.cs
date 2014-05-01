@@ -47,7 +47,7 @@ namespace Regard.Consumer.Logic.Pipeline
 
             if (!inputData.TryGetValue("payload", out payload))
             {
-                return input.WithError("Event has no organization");
+                return input.WithError("Event has no payload");
             }
 
             // Check the version number
