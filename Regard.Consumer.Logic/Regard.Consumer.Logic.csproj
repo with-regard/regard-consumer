@@ -48,7 +48,7 @@
       <HintPath>..\packages\Newtonsoft.Json.6.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Regard.Query">
-      <HintPath>..\packages\Regard.Query.1.0.0.0\lib\net451\Regard.Query.dll</HintPath>
+      <HintPath>..\packages\Regard.Query.1.0.19.0\lib\net451\Regard.Query.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -82,6 +82,7 @@
     <Compile Include="Pipeline\ProcessPipeline.cs" />
     <Compile Include="Pipeline\SimplePipeline.cs" />
     <Compile Include="Pipeline\StoreAzureTable.cs" />
+    <Compile Include="Pipeline\StoreQueryEngine.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegardEvent.cs" />
     <Compile Include="SignatureUtil.cs" />
