@@ -78,6 +78,7 @@
     <Compile Include="Pipeline\CheckUser.cs" />
     <Compile Include="Pipeline\DecomposeStage.cs" />
     <Compile Include="Pipeline\AzureTablePipeline.cs" />
+    <Compile Include="Pipeline\DefaultDataStorePipeline.cs" />
     <Compile Include="Pipeline\HealthCheckRoutingStage.cs" />
     <Compile Include="Pipeline\ProcessPipeline.cs" />
     <Compile Include="Pipeline\SimplePipeline.cs" />
