@@ -1,17 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ServiceDefinition name="Regard.Consumer" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceDefinition" schemaVersion="2014-01.2.3">
+<ServiceDefinition name="Regard.Consumer" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceDefinition" schemaVersion="2013-10.2.2">
   <WorkerRole name="RegardConsumerRole" vmsize="Small">
     <Imports>
       <Import moduleName="Diagnostics" />
     </Imports>
     <ConfigurationSettings>
       <Setting name="Regard.ServiceBus.ConnectionString" />
-      <Setting name="Regard.ServiceBus.EventTopic" />
-      <Setting name="Regard.ServiceBus.SubscriptionName" />
-      <Setting name="Regard.Storage.ConnectionString" />
-      <Setting name="Regard.Storage.EventTable" />
-      <Setting name="Regard.Storage.CustomerTable" />
-      <Setting name="Regard.HealthCheck.SharedSecret" />
+      <Setting name="Regard.ServiceBus.EventTopic"/>
+      <Setting name="Regard.ServiceBus.SubscriptionName"/>
+      <Setting name="Regard.Storage.ConnectionString"/>
+      <Setting name="Regard.Storage.EventTable"/>
+      <Setting name="Regard.Storage.CustomerTable"/>
+      <Setting name="Regard.HealthCheck.SharedSecret"/>
     </ConfigurationSettings>
   </WorkerRole>
 </ServiceDefinition>
