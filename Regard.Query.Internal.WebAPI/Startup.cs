@@ -4,8 +4,11 @@ using Owin;
 namespace Regard.Query.Internal.WebAPI
 {
     /// <summary>
-    /// 
+    /// Startup class for the internal Web API (used to drive the query library from internal services).
     /// </summary>
+    /// <remarks>
+    /// Note that this version has no authentication so care should be taken not to expose the interface externally.
+    /// </remarks>
     public class Startup
     {
         public void Configuration(IAppBuilder app)
