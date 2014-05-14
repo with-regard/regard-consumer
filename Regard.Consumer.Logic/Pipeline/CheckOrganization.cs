@@ -60,6 +60,9 @@ namespace Regard.Consumer.Logic.Pipeline
                 return input.WithError("Invalid organization");
             }
 
+            // TODO: it's now the query library's job to know whether or not an organization is valid or not: the organization table is at best redundant data
+            return input;
+
             // Drop with an error if the input organization isn't in the organizations table
             var existingOrganization = await m_OrganizationTable.Find(c_OrganizationsPartition, StorageUtil.SanitiseKey(input.Organization()));
 
