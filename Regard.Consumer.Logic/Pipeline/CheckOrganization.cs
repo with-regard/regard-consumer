@@ -65,7 +65,7 @@ namespace Regard.Consumer.Logic.Pipeline
 
             if (existingOrganization == null)
             {
-                return input.WithError("Organization is not registered");
+                return input.WithError(String.Format("Organization is not registered: [{0}]", input.Organization()));
             }
 
             // TODO: check that this event really belongs to this organization?
