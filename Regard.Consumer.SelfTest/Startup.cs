@@ -7,8 +7,8 @@ namespace Regard.Consumer.SelfTest
     /// Public self-test API for the regard consumer process
     /// </summary>
     /// <remarks>
-    /// This is mainly to allow us to verify that the consumer is up and processing commands. The results are public: anybody can see them, so the tests are
-    /// fairly limited.
+    /// This is mainly to allow us to verify that the consumer and query engine is up and processing commands. The results are public: anybody can see them, so the tests are
+    /// fairly limited: basically, make sure the public functionality is working.
     /// </remarks>
     public class Startup
     {
