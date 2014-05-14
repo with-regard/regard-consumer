@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30110.0
+VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{CC5FD16D-436D-48AD-A40C-5A424C6E3E79}") = "Regard.Consumer", "Regard.Consumer\Regard.Consumer.ccproj", "{4208D285-01FE-4165-9D01-0CDB0D20F37A}"
 EndProject
@@ -15,6 +15,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{4AFB7C
 	ProjectSection(SolutionItems) = preProject
 		.nuget\packages.config = .nuget\packages.config
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Regard.Query.Internal.WebAPI", "Regard.Query.Internal.WebAPI\Regard.Query.Internal.WebAPI.csproj", "{4BDDDC1A-9FFF-4947-A31F-D4AB0D8E2EF0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -38,6 +40,10 @@ Global
 		{3BFA6B3E-386D-410B-9903-4C5BA34BD5B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3BFA6B3E-386D-410B-9903-4C5BA34BD5B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3BFA6B3E-386D-410B-9903-4C5BA34BD5B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4BDDDC1A-9FFF-4947-A31F-D4AB0D8E2EF0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4BDDDC1A-9FFF-4947-A31F-D4AB0D8E2EF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4BDDDC1A-9FFF-4947-A31F-D4AB0D8E2EF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4BDDDC1A-9FFF-4947-A31F-D4AB0D8E2EF0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
