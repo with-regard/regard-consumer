@@ -11,6 +11,7 @@
             , new CanOptInDefaultUser()
             , new CanCreateQuery()
             , new QueryInitiallyReturnsNoResults()
+            , new QueryReturnsDataForEvents()
         
         }, "QueryApiTests")
         {
