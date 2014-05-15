@@ -20,6 +20,7 @@
       <Site name="Web">
         <Bindings>
           <Binding name="Endpoint1" endpointName="Regard.Query.WebAPI" />
+          <Binding name="Endpoint1" endpointName="Regard.Query.WebAPI.Public.Deleteme.Deleteme.Deleteme" />
         </Bindings>
       </Site>
     </Sites>
@@ -28,6 +29,7 @@
     </Imports>
     <Endpoints>
       <InternalEndpoint name="Regard.Query.WebAPI" protocol="http" port="8080" />
+      <InputEndpoint name="Regard.Query.WebAPI.Public.Deleteme.Deleteme.Deleteme" protocol="http" port="80" />
     </Endpoints>
     <ConfigurationSettings>
       <Setting name="Regard.ServiceBus.ConnectionString" />
