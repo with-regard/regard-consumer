@@ -1,4 +1,5 @@
-﻿using System.Web.Http;
+﻿using System.Threading;
+using System.Web.Http;
 using Owin;
 
 namespace Regard.Consumer.SelfTest
@@ -14,6 +15,10 @@ namespace Regard.Consumer.SelfTest
     {
         public void Configuration(IAppBuilder app)
         {
+            // Set up a small thread pool
+            ThreadPool.SetMaxThreads(40, 100);
+            ThreadPool.SetMinThreads(1, 5);
+
             // Configure for attribute routes
             var httpConfiguration = new HttpConfiguration();
 
