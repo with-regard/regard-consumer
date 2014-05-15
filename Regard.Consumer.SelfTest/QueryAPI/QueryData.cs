@@ -27,9 +27,6 @@ namespace Regard.Consumer.SelfTest.QueryAPI
             get
             {
                 var endpoint = RoleEnvironment.Roles["Regard.Query.Internal.WebAPI"].Instances[0].InstanceEndpoints["Regard.Query.WebAPI"];
-                Trace.WriteLine("Endpoint IP: " + endpoint.IPEndpoint.Address);
-                Trace.WriteLine("Endpoint port: " + endpoint.IPEndpoint.Port);
-
                 return "http://" + endpoint.IPEndpoint.Address + ":" + endpoint.IPEndpoint.Port;
             } 
         }
