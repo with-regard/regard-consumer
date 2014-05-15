@@ -30,7 +30,7 @@ namespace Regard.Consumer.SelfTest.QueryAPI
             {
                 return JObject.FromObject(new
                 {
-                    Result = "Bad response status code",
+                    Error = "Bad response status code",
                     StatusCode = (int)response.Item2
                 });
             }
