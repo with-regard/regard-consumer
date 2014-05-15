@@ -79,7 +79,7 @@ namespace Regard.Consumer.SelfTest.QueryAPI
                 JObject resultData = null;
 
                 // Read the response data
-                if (response.ContentType == "application/json" || response.ContentType == "text/json")
+                if (response.ContentType.StartsWith("application/json") || response.ContentType.StartsWith("text/json"))
                 {
                     using (var responseStream = response.GetResponseStream())
                     {
