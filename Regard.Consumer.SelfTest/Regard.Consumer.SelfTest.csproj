@@ -127,6 +127,7 @@
     <Compile Include="MultipleTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QueryAPI\CanCreateTestProduct.cs" />
+    <Compile Include="QueryAPI\CanOptInDefaultUser.cs" />
     <Compile Include="QueryAPI\QueryApiTests.cs" />
     <Compile Include="QueryAPI\QueryData.cs" />
     <Compile Include="QueryAPI\QueryUtil.cs" />

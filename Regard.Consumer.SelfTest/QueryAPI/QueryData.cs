@@ -12,6 +12,7 @@ namespace Regard.Consumer.SelfTest.QueryAPI
         static QueryData()
         {
             ThisSessionProductName = Guid.NewGuid().ToString();
+            TestUserId = Guid.NewGuid().ToString();
         }
         
         /// <summary>
@@ -37,5 +38,10 @@ namespace Regard.Consumer.SelfTest.QueryAPI
         /// by this framework, though it's always safe to do so manually)
         /// </summary>
         public static string ThisSessionProductName { get; private set; }
+
+        /// <summary>
+        /// The UID of the test user
+        /// </summary>
+        public static string TestUserId { get; private set; }
     }
 }
