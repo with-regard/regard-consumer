@@ -15,7 +15,7 @@ namespace Regard.Consumer.SelfTest.QueryAPI
     public static class QueryUtil
     {
         /// <summary>
-        /// Calls the query API
+        /// Calls the query API, returning the JSON object that represents the result and the status code
         /// </summary>
         public static async Task<Tuple<JObject, HttpStatusCode>> RunQuery(string path, JObject data, string verb)
         {

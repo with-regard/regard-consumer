@@ -11,6 +11,11 @@ namespace Regard.Consumer.SelfTest.QueryAPI
         {
             ThisSessionProductName = Guid.NewGuid().ToString();
         }
+        
+        /// <summary>
+        /// The name of the organization that the test projects will be created under
+        /// </summary>
+        public static string OrganizationName { get { return "WithRegard"; } }
 
         /// <summary>
         /// The internal endpoint where the query API should reside
