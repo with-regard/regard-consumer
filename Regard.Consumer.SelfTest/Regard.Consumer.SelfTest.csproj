@@ -71,11 +71,15 @@
     <Reference Include="Microsoft.WindowsAzure.Storage, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\WindowsAzure.Storage.2.1.0.0\lib\net40\Microsoft.WindowsAzure.Storage.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Owin">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Regard.Query">
+      <HintPath>..\packages\Regard.Query.1.0.38.0\lib\net45\Regard.Query.dll</HintPath>
     </Reference>
     <Reference Include="System.Data.Services.Client" />
     <Reference Include="System.Net.Http" />
@@ -126,6 +130,7 @@
     <Compile Include="ITest.cs" />
     <Compile Include="MultipleTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QueryAPI\CanCreateQuery.cs" />
     <Compile Include="QueryAPI\CanCreateTestProduct.cs" />
     <Compile Include="QueryAPI\CanOptInDefaultUser.cs" />
     <Compile Include="QueryAPI\QueryApiTests.cs" />

@@ -60,7 +60,7 @@ namespace Regard.Consumer.SelfTest.QueryAPI
                             {
                                 resultData = JObject.Parse(shouldBeJson);
                             }
-                            catch (JsonException e)
+                            catch (JsonException)
                             {
                                 Trace.TraceError("Response is not valid JSON");
                                 resultData = null;

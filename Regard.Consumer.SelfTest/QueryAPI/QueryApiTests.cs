@@ -9,6 +9,8 @@
         {
             new CanCreateTestProduct()
             , new CanOptInDefaultUser()
+            , new CanCreateQuery()
+            // , new QueryInitiallyReturnsNoResults()
         
         }, "QueryApiTests")
         {
