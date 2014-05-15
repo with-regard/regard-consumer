@@ -26,6 +26,9 @@ namespace Regard.Consumer.SelfTest
             // It's quite likely we will eventually want this to be able to talk to the query database directly.
             httpConfiguration.MapHttpAttributeRoutes();
 
+            // Start the tests running when we start up
+            TestResults.RunTests();
+
             app.UseWebApi(httpConfiguration);
 
             app.Run(async context =>

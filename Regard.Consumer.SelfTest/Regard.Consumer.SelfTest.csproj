@@ -109,6 +109,7 @@
     <Compile Include="QueryAPI\QueryUtil.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="TestController.cs" />
+    <Compile Include="TestResults.cs" />
   </ItemGroup>
   <ItemGroup />
   <PropertyGroup>
