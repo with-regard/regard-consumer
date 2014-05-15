@@ -103,8 +103,12 @@
     <Compile Include="ITest.cs" />
     <Compile Include="MultipleTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QueryAPI\CreateProduct.cs" />
+    <Compile Include="QueryAPI\QueryData.cs" />
+    <Compile Include="QueryAPI\QueryUtil.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
