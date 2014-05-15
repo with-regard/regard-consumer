@@ -101,6 +101,10 @@ namespace Regard.Consumer.SelfTest.QueryAPI
                         }
                     }
                 }
+                else
+                { 
+                    Trace.WriteLine("Response content-type is " + response.ContentType);
+                }
 
                 // Return as a tuple
                 return new Tuple<JObject, HttpStatusCode>(resultData, statusCode);
