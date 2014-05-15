@@ -24,6 +24,11 @@ namespace Regard.Consumer.SelfTest.QueryAPI
                 });
             }
 
+            if (response.Item1 == null)
+            {
+                return JObject.FromObject(new {Error = "Server didn't return any results"});
+            }
+
             Trace.WriteLine("QueryInitiallyReturnsNoResults: retrieved response: " + response.Item1);
 
             var resultObj = response.Item1;

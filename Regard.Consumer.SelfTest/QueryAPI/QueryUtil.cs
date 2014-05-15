@@ -15,6 +15,38 @@ namespace Regard.Consumer.SelfTest.QueryAPI
     public static class QueryUtil
     {
         /// <summary>
+        /// Sends an event relating to the test product
+        /// </summary>
+        public static async Task<HttpStatusCode> SendEvent(JObject eventData)
+        {
+            // Format the event as a new session event
+            JObject realEvent = (JObject) eventData.DeepClone();
+
+            // TODO: I think that the eventData will end up in a 'data' field, but there's nothing to do this yet
+            realEvent["user-id"] = QueryData.TestUserId;
+            realEvent["new-session"] = true;
+            realEvent["session-id"] = Guid.NewGuid().ToString();
+
+            // Convert to binary
+            Trace.WriteLine("Sending event: " + realEvent);
+            var payloadBytes = Encoding.UTF8.GetBytes(realEvent.ToString());
+
+            // Send to the service
+            var request = WebRequest.Create(new Uri("https://api.withregard.io/track/v1/" + QueryData.OrganizationName + "/" + QueryData.ThisSessionProductName));
+            request.ContentType = "application/json";
+            request.ContentLength = payloadBytes.Length;
+
+            var payloadStream = await request.GetRequestStreamAsync();
+            payloadStream.Write(payloadBytes, 0, payloadBytes.Length);
+            payloadStream.Close();
+
+            using (var response = (HttpWebResponse)await request.GetResponseAsync())
+            {
+                return response.StatusCode;
+            }
+        }
+
+        /// <summary>
         /// Calls the query API, returning the JSON object that represents the result and the status code
         /// </summary>
         public static async Task<Tuple<JObject, HttpStatusCode>> RunQuery(string path, JObject data, string verb)
@@ -36,6 +68,7 @@ namespace Regard.Consumer.SelfTest.QueryAPI
                 // Write to the request
                 var payloadStream = await request.GetRequestStreamAsync();
                 payloadStream.Write(payloadBytes, 0, payloadBytes.Length);
+                payloadStream.Close();
             }
 
             // Perform the request

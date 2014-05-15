@@ -136,6 +136,7 @@
     <Compile Include="QueryAPI\QueryApiTests.cs" />
     <Compile Include="QueryAPI\QueryData.cs" />
     <Compile Include="QueryAPI\QueryInitiallyReturnsNoResults.cs" />
+    <Compile Include="QueryAPI\QueryReturnsDataForEvents.cs" />
     <Compile Include="QueryAPI\QueryUtil.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="TestController.cs" />
