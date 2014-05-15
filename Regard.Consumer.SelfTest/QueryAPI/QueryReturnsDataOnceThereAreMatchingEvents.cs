@@ -8,7 +8,7 @@ using Newtonsoft.Json.Linq;
 
 namespace Regard.Consumer.SelfTest.QueryAPI
 {
-    public class QueryReturnsDataForEvents : ITest
+    public class QueryReturnsDataOnceThereAreMatchingEvents : ITest
     {
         public async Task<JObject> Run()
         {
@@ -55,6 +55,6 @@ namespace Regard.Consumer.SelfTest.QueryAPI
             return JObject.FromObject(new { Error = "Query never received the events" });
         }
 
-        public string Name { get { return "QueryReturnsDataForEvents"; } }
+        public string Name { get { return "QueryReturnsDataOnceThereAreMatchingEvents"; } }
     }
 }
