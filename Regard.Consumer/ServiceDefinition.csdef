@@ -40,4 +40,19 @@
       <Setting name="Regard.HealthCheck.SharedSecret" />
     </ConfigurationSettings>
   </WebRole>
+  <WebRole name="Regard.Consumer.SelfTest" vmsize="Small">
+    <Sites>
+      <Site name="Web">
+        <Bindings>
+          <Binding name="Endpoint1" endpointName="Regard.Consumer.SelfTest" />
+        </Bindings>
+      </Site>
+    </Sites>
+    <Endpoints>
+      <InputEndpoint name="Regard.Consumer.SelfTest" protocol="http" port="8181" />
+    </Endpoints>
+    <Imports>
+      <Import moduleName="Diagnostics" />
+    </Imports>
+  </WebRole>
 </ServiceDefinition>
