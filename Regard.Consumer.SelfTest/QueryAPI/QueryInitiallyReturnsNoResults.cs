@@ -34,7 +34,7 @@ namespace Regard.Consumer.SelfTest.QueryAPI
             var resultObj = response.Item1;
 
             // Should contain Results.EventCount = 0
-            if (resultObj["Results"]["EventCount"].Value<int>() != 0)
+            if (resultObj["Results"][0]["EventCount"].Value<int>() != 0)
             {
                 return JObject.FromObject(new {Error = "Should be no events"});
             }

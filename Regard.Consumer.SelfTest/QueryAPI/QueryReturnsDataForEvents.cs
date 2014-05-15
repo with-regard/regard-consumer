@@ -36,7 +36,7 @@ namespace Regard.Consumer.SelfTest.QueryAPI
                 var response = await QueryUtil.RunQuery(queryUrl, null, "GET");
                 var resultObj = response.Item1;
 
-                var count = resultObj["Results"]["EventCount"].Value<int>();
+                var count = resultObj["Results"][0]["EventCount"].Value<int>();
                 Trace.WriteLine("Event count is " + count);
 
                 if (count == 2)
