@@ -85,7 +85,7 @@ namespace Regard.Consumer.SelfTest.QueryAPI
                     {
                         if (responseStream != null)
                         { 
-                            var streamReader = new StreamReader(responseStream, Encoding.GetEncoding(response.ContentEncoding));
+                            var streamReader = new StreamReader(responseStream, Encoding.UTF8);
                             var shouldBeJson = await streamReader.ReadToEndAsync();
 
                             // Convert to JSON
