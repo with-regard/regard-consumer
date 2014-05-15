@@ -8,7 +8,7 @@ namespace Regard.Consumer.SelfTest.QueryAPI
     /// Ensures that the query interface is capable of creating new products. The product created by this test is used by other tests, so this generally
     /// needs to execute first.
     /// </summary>
-    public class CreateProduct : ITest
+    public class CanCreateTestProduct : ITest
     {
         public async Task<JObject> Run()
         {
@@ -41,6 +41,6 @@ namespace Regard.Consumer.SelfTest.QueryAPI
             });
         }
 
-        public string Name { get { return "CreateProduct"; } }
+        public string Name { get { return "CanCreateTestProduct"; } }
     }
 }
