@@ -34,6 +34,7 @@ namespace Regard.Consumer.SelfTest
             {
                 try
                 {
+                    Trace.WriteLine("Test: " + test.Name);
                     var testResult = await test.Run();
 
                     result[test.Name] = testResult;
