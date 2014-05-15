@@ -29,6 +29,10 @@ namespace Regard.Consumer.SelfTest
         /// </summary>
         public static void RunTests()
         {
+            // Nothing to do if the tests are already running
+            if (s_RunningTests != null) return;
+
+            // Begin the tests
             s_RunningTests = RunTestsInBackground();
         }
 
