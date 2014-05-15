@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Diagnostics;
+using Microsoft.WindowsAzure.ServiceRuntime;
 
 namespace Regard.Consumer.SelfTest.QueryAPI
 {
@@ -20,7 +22,17 @@ namespace Regard.Consumer.SelfTest.QueryAPI
         /// <summary>
         /// The internal endpoint where the query API should reside
         /// </summary>
-        public static string QueryEndPointUrl { get { return "http://regard-consumer.cloudapp.net:8080/"; } }
+        public static string QueryEndPointUrl 
+        {
+            get
+            {
+                var endpoint = RoleEnvironment.Roles["Regard.Query.Internal.WebAPI"].Instances[0].InstanceEndpoints["Regard.Query.WebAPI"];
+                Trace.WriteLine("Endpoint IP: " + endpoint.IPEndpoint.Address);
+                Trace.WriteLine("Endpoint port: " + endpoint.IPEndpoint.Port);
+
+                return "http://" + endpoint.IPEndpoint.Address + ":" + endpoint.IPEndpoint.Port;
+            } 
+        }
 
         /// <summary>
         /// The name of the product that this test session should create. This should be unique for every session, so will indicate a
