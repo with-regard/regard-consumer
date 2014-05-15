@@ -5,7 +5,12 @@
     /// </summary>
     internal class QueryApiTests : MultipleTests
     {
-        public QueryApiTests() : base(new[] { new CanCreateTestProduct() }, "QueryApiTests")
+        public QueryApiTests() : base(new ITest[]
+        {
+            new CanCreateTestProduct()
+            , new CanOptInDefaultUser()
+        
+        }, "QueryApiTests")
         {
         }
     }
