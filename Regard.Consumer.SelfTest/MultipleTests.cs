@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
@@ -31,9 +32,22 @@ namespace Regard.Consumer.SelfTest
 
             foreach (var test in m_Tests)
             {
-                var testResult = await test.Run();
+                try
+                {
+                    var testResult = await test.Run();
 
-                result[test.Name] = testResult;
+                    result[test.Name] = testResult;
+                }
+                catch (Exception e)
+                {
+                    Trace.TraceError("Test {0} Exception: {1}", test.Name, e);
+
+                    // Report exceptions if any occur
+                    result[test.Name] = JObject.FromObject(new
+                    {
+                        Exception = e.GetType().Name
+                    });
+                }
             }
 
             return result;

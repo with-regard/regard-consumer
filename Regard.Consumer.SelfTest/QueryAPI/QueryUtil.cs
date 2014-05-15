@@ -34,7 +34,7 @@ namespace Regard.Consumer.SelfTest.QueryAPI
                 request.ContentLength   = payloadBytes.Length;
 
                 // Write to the request
-                var payloadStream = request.GetRequestStream();
+                var payloadStream = await request.GetRequestStreamAsync();
                 payloadStream.Write(payloadBytes, 0, payloadBytes.Length);
             }
 

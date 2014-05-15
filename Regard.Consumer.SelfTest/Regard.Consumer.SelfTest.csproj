@@ -103,11 +103,12 @@
     <Compile Include="ITest.cs" />
     <Compile Include="MultipleTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="QueryAPI\CreateProduct.cs" />
+    <Compile Include="QueryAPI\CanCreateTestProduct.cs" />
     <Compile Include="QueryAPI\QueryApiTests.cs" />
     <Compile Include="QueryAPI\QueryData.cs" />
     <Compile Include="QueryAPI\QueryUtil.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="TestController.cs" />
   </ItemGroup>
   <ItemGroup />
   <PropertyGroup>
