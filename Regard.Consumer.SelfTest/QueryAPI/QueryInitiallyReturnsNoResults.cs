@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System.Diagnostics;
+using System.Net;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 using Regard.Query.Serializable;
@@ -22,6 +23,8 @@ namespace Regard.Consumer.SelfTest.QueryAPI
                     StatusCode = (int)response.Item2
                 });
             }
+
+            Trace.WriteLine("QueryInitiallyReturnsNoResults: retrieved response: " + response.Item1);
 
             var resultObj = response.Item1;
 
