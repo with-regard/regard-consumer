@@ -26,13 +26,25 @@ namespace Regard.Consumer.SelfTest
             // It's quite likely we will eventually want this to be able to talk to the query database directly.
             httpConfiguration.MapHttpAttributeRoutes();
 
-            // Start the tests running when we start up
-            TestResults.RunTests();
+            bool startedTests = false;
 
             app.UseWebApi(httpConfiguration);
 
             app.Run(async context =>
             {
+                // Start the tests if they have not been run yet
+                if (!startedTests)
+                {
+                    startedTests = true;
+                    TestResults.RunTests();
+
+                    context.Response.ContentType = "text/plain";
+                    context.Response.StatusCode = 200;
+                    await context.Response.WriteAsync("OK (self-test started)");
+
+                    return;
+                }
+
                 // Default response is pretty boring
                 context.Response.ContentType = "text/plain";
                 context.Response.StatusCode = 200;
