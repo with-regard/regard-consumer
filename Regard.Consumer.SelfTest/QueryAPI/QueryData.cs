@@ -20,7 +20,7 @@ namespace Regard.Consumer.SelfTest.QueryAPI
         /// <summary>
         /// The internal endpoint where the query API should reside
         /// </summary>
-        public static string QueryEndPointUrl { get { return "https://regard-consumer.cloudapp.net:8080/"; } }
+        public static string QueryEndPointUrl { get { return "http://regard-consumer.cloudapp.net:8080/"; } }
 
         /// <summary>
         /// The name of the product that this test session should create. This should be unique for every session, so will indicate a

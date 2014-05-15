@@ -40,7 +40,7 @@
       <Setting name="Regard.HealthCheck.SharedSecret" />
     </ConfigurationSettings>
   </WebRole>
-  <WebRole name="Regard.Consumer.SelfTest" vmsize="Small">
+  <WebRole name="Regard.Consumer.SelfTest" vmsize="ExtraSmall">
     <Sites>
       <Site name="Web">
         <Bindings>
