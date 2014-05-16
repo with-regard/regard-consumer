@@ -41,7 +41,7 @@ namespace Regard.Consumer.SelfTest.QueryAPI
 
             // Convert to binary
             Trace.WriteLine("Sending event: " + realEvent);
-            Trace.WriteLine("Target URL: targetUrl");
+            Trace.WriteLine("Target URL: " + targetUrl);
             var payloadBytes = Encoding.UTF8.GetBytes(realEvent.ToString());
 
             // Send to the service
