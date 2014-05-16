@@ -42,7 +42,7 @@ task compile {
     exec { msbuild $base_dir\Regard.Consumer.sln /p:Configuration=$config /verbosity:minimal /tv:4.0 /p:VisualStudioVersion=$visualStudioVersion }
 }
 
-task test {
+task test -depends compile {
     "Testing"
     
     exec { & $base_dir\packages\NUnit.Runners.2.6.3\tools\nunit-console.exe $base_dir\Regard.Consumer.Tests\bin\$config\Regard.Consumer.Tests.dll }
