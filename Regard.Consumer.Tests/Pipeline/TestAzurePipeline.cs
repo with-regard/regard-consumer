@@ -15,7 +15,7 @@ namespace Regard.Consumer.Tests.Pipeline
         /// <summary>
         /// A very simple example of an event
         /// </summary>
-        public const string c_TestRawData = "{\"schema_version\":256,\"organization\":\"WithRegard\",\"product\":\"Regard Tests\",\"payload\":{\"data\":\"something\"}}";
+        public const string c_TestRawData = "{\"schema_version\":256,\"organization\":\"WithRegard\",\"product\":\"Regard Tests\",\"payload\":{\"user-id\":\"4C148551-5720-4066-8F59-F42ABE3CC530\",\"session-id\":\"4C148551-5720-4066-8F59-F42ABE3CC530\",\"new-session\":true,\"data\":{\"something\":false}}}";
 
         [Test]
         public async Task StoreOneEvent()
