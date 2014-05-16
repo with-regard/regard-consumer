@@ -10,7 +10,7 @@ namespace Regard.Consumer.Tests.PipelineStages
     class TestHealthCheck
     {
         [Test]
-        public async Task HealthCheckSetRowKey()
+        public async Task HealthCheckEventWillSetRowKey()
         {
             var healthCheck = new HealthCheckRoutingStage("TestHealthCheck");
 
@@ -37,7 +37,7 @@ namespace Regard.Consumer.Tests.PipelineStages
         }
 
         [Test]
-        public async Task IgnoreIncorrectSignature()
+        public async Task RejectHealthCheckWithBadSignature()
         {
             var healthCheck = new HealthCheckRoutingStage("TestHealthCheck");
 
@@ -64,7 +64,7 @@ namespace Regard.Consumer.Tests.PipelineStages
         }
 
         [Test]
-        public async Task IgnoreIncorrectOrganisation()
+        public async Task RejectHealthCheckIfOrganizationIsInvalid()
         {
             var healthCheck = new HealthCheckRoutingStage("TestHealthCheck");
 
@@ -72,6 +72,33 @@ namespace Regard.Consumer.Tests.PipelineStages
 
             // Set the product/organisation correctly
             input = input.WithOrganization("IncorrectOrganisation").WithProduct(HealthCheckRoutingStage.c_Product);
+
+            // Set the payload to something correct
+            var payload = JsonConvert.SerializeObject(new
+            {
+                rowkey = "TestRowKey",
+                rowkeysignature = SignatureUtil.Signature("TestRowKey", "TestHealthCheck")
+            });
+
+            input = input.WithPayload(payload);
+
+            // Process
+            var output = await healthCheck.Process(input);
+
+            // Check
+            Assert.IsNullOrEmpty(output.Error());
+            Assert.IsNullOrEmpty(output[EventKeys.KeyRowKey]);
+        }
+
+        [Test]
+        public async Task RejectHealthCheckIfProductIsInvalid()
+        {
+            var healthCheck = new HealthCheckRoutingStage("TestHealthCheck");
+
+            var input = RegardEvent.Create("Raw data shouldn't matter");
+
+            // Set the product/organisation correctly
+            input = input.WithOrganization(HealthCheckRoutingStage.c_Organization).WithProduct("NotHealthCheck");
 
             // Set the payload to something correct
             var payload = JsonConvert.SerializeObject(new

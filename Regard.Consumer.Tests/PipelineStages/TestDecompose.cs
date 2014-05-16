@@ -19,7 +19,7 @@ namespace Regard.Consumer.Tests.PipelineStages
         public const string c_NotJSON = "This is not JSON";
 
         [Test]
-        public async Task DecomposeCompleteEvent()
+        public async Task ValidEventWillBeDecomposedCorrectly()
         {
             var decompose = new DecomposeStage();
             var input = RegardEvent.Create(JsonConvert.SerializeObject(new

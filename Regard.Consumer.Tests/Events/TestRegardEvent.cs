@@ -8,7 +8,7 @@ namespace Regard.Consumer.Tests.Events
     class TestRegardEvent
     {
         [Test]
-        public static void CanCreate()
+        public static void CanCreateAnEmptyEvent()
         {
             // Can create an event
             var evt = RegardEvent.Create("Test");
@@ -16,7 +16,7 @@ namespace Regard.Consumer.Tests.Events
         }
 
         [Test]
-        public static void RetrieveRawData()
+        public static void RawDataMatchesCreationValue()
         {
             // Can retrieve the raw data used when creating the object
             var evt = RegardEvent.Create("Test");
@@ -24,7 +24,7 @@ namespace Regard.Consumer.Tests.Events
         }
 
         [Test]
-        public static void RetrieveArbitraryData()
+        public static void CanSetAndRetrieveDataWithAnArbitraryKey()
         {
             // Can write to any key
             var evt = RegardEvent.Create("Test");
@@ -34,14 +34,14 @@ namespace Regard.Consumer.Tests.Events
         }
 
         [Test]
-        public static void DefaultValueIsNull()
+        public static void DefaultValueForDataIsNull()
         {
             var evt = RegardEvent.Create("Test");
             Assert.AreEqual(null, evt["Test.Arbitrary"]);
         }
 
         [Test]
-        public static void DistinctFields()
+        public static void ArbitraryDataIsStoredInDistinctFields()
         {
             // Ensure that field data actually is stored and is retrievable from arbitrary keys
             var evt = RegardEvent.Create("Test");
@@ -58,7 +58,7 @@ namespace Regard.Consumer.Tests.Events
         }
 
         [Test]
-        public static void Immutable()
+        public static void RawDataIsImmutable()
         {
             // Calling 'With' should create a new object with the new values and not update the old one
             var evt = RegardEvent.Create("Test");
@@ -70,7 +70,19 @@ namespace Regard.Consumer.Tests.Events
         }
 
         [Test]
-        public static void ImmutableForNonexistent()
+        public static void ArbitraryDataIsImmutable()
+        {
+            // Calling 'With' should create a new object with the new values and not update the old one
+            var evt = RegardEvent.Create("Raw").With("TestField", "Test");
+            var evt2 = evt.With("TestField", "Different");
+
+            Assert.IsNotNull(evt2);
+            Assert.AreEqual("Test", evt["TestField"]);
+            Assert.AreEqual("Different", evt2["TestField"]);
+        }
+
+        [Test]
+        public static void NonexistentFieldsAreAlsoImmutable()
         {
             // Fields should remain null after a 'with'
             var evt = RegardEvent.Create("Test");
