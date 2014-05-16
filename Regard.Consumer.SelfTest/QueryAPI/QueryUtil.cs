@@ -22,7 +22,6 @@ namespace Regard.Consumer.SelfTest.QueryAPI
             // Format the event as a new session event
             JObject realEvent = new JObject();
 
-            // TODO: I think that the eventData will end up in a 'data' field, but there's nothing to do this yet
             realEvent["user-id"] = QueryData.TestUserId;
             realEvent["new-session"] = true;
             realEvent["session-id"] = Guid.NewGuid().ToString();
