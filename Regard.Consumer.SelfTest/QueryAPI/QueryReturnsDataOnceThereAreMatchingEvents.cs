@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace Regard.Consumer.SelfTest.QueryAPI
@@ -32,12 +33,14 @@ namespace Regard.Consumer.SelfTest.QueryAPI
                         new {Error = "Endpoint did not respond correctly to events", StatusCode = sendEventResponse});
             }
 
+            DateTime initialTime = DateTime.Now;
             for (int attempt = 0; attempt < maxAttempts; attempt++)
             {
-                // Wait 5 seconds between attempts
-                await Task.Delay(TimeSpan.FromSeconds(5));
+                // Wait 10 seconds between attempts
+                await Task.Delay(TimeSpan.FromSeconds(10));
 
-                Trace.WriteLine("Attempting to verify query results, attempt " + attempt);
+                // Log the time between tests. Events don't need to go through the system super fast, so it may take a few seconds for the query to update
+                Trace.WriteLine((DateTime.Now - initialTime).TotalSeconds + ": Attempting to verify query results, attempt " + attempt);
 
                 // Run the query
                 var queryUrl = "product/v1/" + QueryData.OrganizationName + "/" + QueryData.ThisSessionProductName + "/run-query/test";
@@ -45,7 +48,7 @@ namespace Regard.Consumer.SelfTest.QueryAPI
                 var resultObj = response.Item1;
 
                 var count = resultObj["Results"][0]["EventCount"].Value<int>();
-                Trace.WriteLine("Event count is " + count);
+                Trace.WriteLine("Event count is " + count + " raw data: (" + resultObj.ToString(Formatting.None) + ")");
 
                 if (count == 2)
                 {
