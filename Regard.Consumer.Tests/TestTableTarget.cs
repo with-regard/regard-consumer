@@ -8,7 +8,7 @@ namespace Regard.Consumer.Tests
     /// <summary>
     /// Table target that just stores a .NET list of entities that have been added
     /// </summary>
-    class TestTableTarget : IFlatTableTarget
+    public class TestTableTarget : IFlatTableTarget
     {
         public TestTableTarget()
         {

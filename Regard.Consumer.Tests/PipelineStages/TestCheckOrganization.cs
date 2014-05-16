@@ -20,18 +20,6 @@ namespace Regard.Consumer.Tests.PipelineStages
 
             Assert.IsNullOrEmpty(result.Error());
         }
-
-        [Test]
-        public async Task RejectUnknownOrganization()
-        {
-            // Organizations that don't exist shouldn't get events added to the table
-            var stage = new CheckOrganization(new TestTableTarget());
-            var input = RegardEvent.Create("Raw data shouldn't matter").WithOrganization("DoesntExist");
-
-            var result = await stage.Process(input);
-
-            Assert.IsNotNullOrEmpty(result.Error());
-        }
     }
 }
  

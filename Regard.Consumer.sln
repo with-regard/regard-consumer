@@ -20,6 +20,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Regard.Query.Internal.WebAP
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Regard.Consumer.SelfTest", "Regard.Consumer.SelfTest\Regard.Consumer.SelfTest.csproj", "{ADC5B405-4964-4477-9ADF-3567CB8AF4E8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Regard.Consumer.Tests.MissingFeatures", "Regard.Consumer.Tests.MissingFeatures\Regard.Consumer.Tests.MissingFeatures.csproj", "{83232E17-FED5-43FA-A1C8-528445464BA3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -50,6 +52,10 @@ Global
 		{ADC5B405-4964-4477-9ADF-3567CB8AF4E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ADC5B405-4964-4477-9ADF-3567CB8AF4E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ADC5B405-4964-4477-9ADF-3567CB8AF4E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{83232E17-FED5-43FA-A1C8-528445464BA3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{83232E17-FED5-43FA-A1C8-528445464BA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{83232E17-FED5-43FA-A1C8-528445464BA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{83232E17-FED5-43FA-A1C8-528445464BA3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
