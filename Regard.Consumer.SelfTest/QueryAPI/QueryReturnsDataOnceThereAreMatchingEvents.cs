@@ -10,7 +10,7 @@ namespace Regard.Consumer.SelfTest.QueryAPI
 {
     public class QueryReturnsDataOnceThereAreMatchingEvents : ITest
     {
-        public async Task<JObject> Run()
+        public async Task<JObject> Run()  
         {
             const int maxAttempts = 6;
 

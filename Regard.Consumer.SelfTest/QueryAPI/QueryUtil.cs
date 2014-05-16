@@ -32,7 +32,7 @@ namespace Regard.Consumer.SelfTest.QueryAPI
             var payloadBytes = Encoding.UTF8.GetBytes(realEvent.ToString());
 
             // Send to the service
-            var request = WebRequest.Create(new Uri("https://api.withregard.io/track/v1/" + QueryData.OrganizationName + "/" + QueryData.ThisSessionProductName));
+            var request = WebRequest.Create(new Uri(QueryData.IngestionEndpointUrl + "/track/v1/" + QueryData.OrganizationName + "/" + QueryData.ThisSessionProductName));
             request.Method = "POST";
             request.ContentType = "application/json";
             request.ContentLength = payloadBytes.Length;

@@ -21,6 +21,14 @@ namespace Regard.Consumer.SelfTest.QueryAPI
         public static string OrganizationName { get { return "WithRegard"; } }
 
         /// <summary>
+        /// The endpoint where 
+        /// </summary>
+        public static string IngestionEndpointUrl
+        {
+            get { return "https://regard-production-collector.azurewebsites.net"; }
+        }
+
+        /// <summary>
         /// The internal endpoint where the query API should reside
         /// </summary>
         public static string QueryEndPointUrl 
