@@ -17,15 +17,16 @@ namespace Regard.Consumer.SelfTest.QueryAPI
         /// <summary>
         /// Creates valid event data ready to be sent to the endpoint from payload information
         /// </summary>
-        public static JObject BuildValidEvent(JObject payload)
+        public static JObject BuildValidEvent(string eventType, JObject payload)
         {
             // Format the event as a new session event
             JObject realEvent = new JObject();
 
             realEvent["user-id"] = QueryData.TestUserId;
-            realEvent["new-session"] = true;
+            /// realEvent["new-session"] = true;     // -- Should be added by the endpoint
             realEvent["session-id"] = Guid.NewGuid().ToString();
             realEvent["data"] = payload;
+            realEvent["time"] = 1234; // Fake time
 
             return realEvent;
         }
@@ -33,9 +34,9 @@ namespace Regard.Consumer.SelfTest.QueryAPI
         /// <summary>
         /// Sends an event relating to the test product
         /// </summary>
-        public static async Task<HttpStatusCode> SendEvent(JObject payload)
+        public static async Task<HttpStatusCode> SendEvent(string eventType, JObject payload)
         {
-            var realEvent = BuildValidEvent(payload);
+            var realEvent = BuildValidEvent(eventType, payload);
             var targetUrl = QueryData.IngestionEndpointUrl + "/track/v1/" + QueryData.OrganizationName + "/" + QueryData.ThisSessionProductName + "/event";
 
             // Convert to binary

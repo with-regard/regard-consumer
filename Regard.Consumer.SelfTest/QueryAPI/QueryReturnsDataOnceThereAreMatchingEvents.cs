@@ -16,13 +16,13 @@ namespace Regard.Consumer.SelfTest.QueryAPI
             const int maxAttempts = 6;
 
             var testEvent = new JObject();
-            testEvent["event-type"] = "test";
+            testEvent["event-data"] = "test";
 
             // Send a couple of events
-            var sendEventResponse = await QueryUtil.SendEvent((JObject) testEvent.DeepClone());
+            var sendEventResponse = await QueryUtil.SendEvent("test", (JObject) testEvent.DeepClone());
             if (sendEventResponse == HttpStatusCode.OK)
             {
-                sendEventResponse = await QueryUtil.SendEvent((JObject) testEvent.DeepClone());
+                sendEventResponse = await QueryUtil.SendEvent("test", (JObject) testEvent.DeepClone());
             }
 
             if (sendEventResponse != HttpStatusCode.OK)
