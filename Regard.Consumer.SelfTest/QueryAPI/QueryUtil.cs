@@ -36,7 +36,7 @@ namespace Regard.Consumer.SelfTest.QueryAPI
         public static async Task<HttpStatusCode> SendEvent(JObject payload)
         {
             var realEvent = BuildValidEvent(payload);
-            var targetUrl = QueryData.IngestionEndpointUrl + "/track/v1/" + QueryData.OrganizationName + "/" + QueryData.ThisSessionProductName;
+            var targetUrl = QueryData.IngestionEndpointUrl + "/track/v1/" + QueryData.OrganizationName + "/" + QueryData.ThisSessionProductName + "/event";
 
             // Convert to binary
             Trace.WriteLine("Sending event: " + realEvent);
