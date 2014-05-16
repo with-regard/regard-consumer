@@ -46,6 +46,7 @@ task test {
     "Testing"
     
     exec { & $base_dir\packages\NUnit.Runners.2.6.3\tools\nunit-console.exe $base_dir\Regard.Consumer.Tests\bin\$config\Regard.Consumer.Tests.dll }
+    exec { & $base_dir\packages\NUnit.Runners.2.6.3\tools\nunit-console.exe $base_dir\Regard.Consumer.Tests.MissingFeatures\bin\$config\Regard.Consumer.Tests.MissingFeatures.dll }
 }
 
 task package -depends test {
