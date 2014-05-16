@@ -36,13 +36,15 @@ namespace Regard.Consumer.SelfTest.QueryAPI
         public static async Task<HttpStatusCode> SendEvent(JObject payload)
         {
             var realEvent = BuildValidEvent(payload);
+            var targetUrl = QueryData.IngestionEndpointUrl + "/track/v1/" + QueryData.OrganizationName + "/" + QueryData.ThisSessionProductName;
 
             // Convert to binary
             Trace.WriteLine("Sending event: " + realEvent);
+            Trace.WriteLine("Target URL: targetUrl");
             var payloadBytes = Encoding.UTF8.GetBytes(realEvent.ToString());
 
             // Send to the service
-            var request = WebRequest.Create(new Uri(QueryData.IngestionEndpointUrl + "/track/v1/" + QueryData.OrganizationName + "/" + QueryData.ThisSessionProductName));
+            var request = WebRequest.Create(new Uri(targetUrl));
             request.Method = "POST";
             request.ContentType = "application/json";
             request.ContentLength = payloadBytes.Length;
@@ -53,6 +55,7 @@ namespace Regard.Consumer.SelfTest.QueryAPI
 
             using (var response = (HttpWebResponse)await request.GetResponseAsync())
             {
+                Trace.WriteLine("Event response code: " + response.StatusCode);
                 return response.StatusCode;
             }
         }
