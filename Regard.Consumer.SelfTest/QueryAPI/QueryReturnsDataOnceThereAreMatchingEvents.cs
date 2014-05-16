@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 using Newtonsoft.Json.Linq;
@@ -18,11 +19,18 @@ namespace Regard.Consumer.SelfTest.QueryAPI
             testEvent["event-type"] = "test";
 
             // Send a couple of events
-            await Task.WhenAll(new[]
+            var sendEventResponse = await QueryUtil.SendEvent((JObject) testEvent.DeepClone());
+            if (sendEventResponse == HttpStatusCode.OK)
             {
-                QueryUtil.SendEvent((JObject) testEvent.DeepClone()),
-                QueryUtil.SendEvent((JObject) testEvent.DeepClone())
-            });
+                sendEventResponse = await QueryUtil.SendEvent((JObject) testEvent.DeepClone());
+            }
+
+            if (sendEventResponse != HttpStatusCode.OK)
+            {
+                return
+                    JObject.FromObject(
+                        new {Error = "Endpoint did not respond correctly to events", StatusCode = sendEventResponse});
+            }
 
             for (int attempt = 0; attempt < maxAttempts; attempt++)
             {
