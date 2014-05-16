@@ -23,8 +23,8 @@ namespace Regard.Consumer.SelfTest.QueryAPI
             JObject realEvent = new JObject();
 
             realEvent["user-id"] = QueryData.TestUserId;
-            /// realEvent["new-session"] = true;     // -- Should be added by the endpoint
             realEvent["session-id"] = Guid.NewGuid().ToString();
+            realEvent["event-type"] = eventType;
             realEvent["data"] = payload;
             realEvent["time"] = 1234; // Fake time
 
