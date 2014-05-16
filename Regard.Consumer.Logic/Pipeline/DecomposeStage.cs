@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -50,6 +51,12 @@ namespace Regard.Consumer.Logic.Pipeline
                 return input.WithError("Event has no payload");
             }
 
+            string adaptedPayload;
+            if (!TryGetAdaptedPayload(payload.ToString(), out adaptedPayload))
+            {
+                return input.WithError("Event doesn't have a valid payload");
+            }
+
             // Check the version number
             if (version.Value<int>() != 0x100)
             {
@@ -60,9 +67,37 @@ namespace Regard.Consumer.Logic.Pipeline
 
             // Create the result
             return input.WithOrganization(organization.ToString())
-                        .WithPayload(payload.ToString())
+                        .WithPayload(adaptedPayload)
                         .WithProduct(product.ToString())
                         .WithVersion(version.ToString());
+        }
+
+        private static bool TryGetAdaptedPayload(string rawPayload, out string adaptedPayload)
+        {
+            try
+            {
+                JObject rawEvent = JObject.Parse(rawPayload);
+
+                JToken dataToken;
+                if (rawEvent.TryGetValue("data", StringComparison.OrdinalIgnoreCase, out dataToken))
+                {
+                    var dataObject = dataToken.Value<JObject>();
+                    foreach (var property in dataObject.Properties())
+                    {
+                        rawEvent.Add(property.Name, property.Value);
+                    }
+
+                    rawEvent.Remove("data");
+                }
+
+                adaptedPayload = JsonConvert.SerializeObject(rawEvent);
+                return true;
+            }
+            catch (Exception)
+            {
+                adaptedPayload = null;
+                return false;
+            }
         }
     }
 }
