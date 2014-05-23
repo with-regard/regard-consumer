@@ -17,16 +17,16 @@ namespace Regard.Consumer.SelfTest.QueryAPI
         /// <summary>
         /// Creates valid event data ready to be sent to the endpoint from payload information
         /// </summary>
-        public static JObject BuildValidEvent(JObject payload)
+        public static JObject BuildValidEvent(string eventType, JObject payload)
         {
             // Format the event as a new session event
             JObject realEvent = new JObject();
 
-            // TODO: I think that the eventData will end up in a 'data' field, but there's nothing to do this yet
             realEvent["user-id"] = QueryData.TestUserId;
-            realEvent["new-session"] = true;
             realEvent["session-id"] = Guid.NewGuid().ToString();
+            realEvent["event-type"] = eventType;
             realEvent["data"] = payload;
+            realEvent["time"] = 1234; // Fake time
 
             return realEvent;
         }
@@ -34,16 +34,18 @@ namespace Regard.Consumer.SelfTest.QueryAPI
         /// <summary>
         /// Sends an event relating to the test product
         /// </summary>
-        public static async Task<HttpStatusCode> SendEvent(JObject payload)
+        public static async Task<HttpStatusCode> SendEvent(string eventType, JObject payload)
         {
-            var realEvent = BuildValidEvent(payload);
+            var realEvent = BuildValidEvent(eventType, payload);
+            var targetUrl = QueryData.IngestionEndpointUrl + "/track/v1/" + QueryData.OrganizationName + "/" + QueryData.ThisSessionProductName + "/event";
 
             // Convert to binary
             Trace.WriteLine("Sending event: " + realEvent);
+            Trace.WriteLine("Target URL: " + targetUrl);
             var payloadBytes = Encoding.UTF8.GetBytes(realEvent.ToString());
 
             // Send to the service
-            var request = WebRequest.Create(new Uri(QueryData.IngestionEndpointUrl + "/track/v1/" + QueryData.OrganizationName + "/" + QueryData.ThisSessionProductName));
+            var request = WebRequest.Create(new Uri(targetUrl));
             request.Method = "POST";
             request.ContentType = "application/json";
             request.ContentLength = payloadBytes.Length;
@@ -54,6 +56,7 @@ namespace Regard.Consumer.SelfTest.QueryAPI
 
             using (var response = (HttpWebResponse)await request.GetResponseAsync())
             {
+                Trace.WriteLine("Event response code: " + response.StatusCode);
                 return response.StatusCode;
             }
         }

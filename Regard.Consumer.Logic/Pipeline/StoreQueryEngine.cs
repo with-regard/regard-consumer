@@ -181,18 +181,15 @@ namespace Regard.Consumer.Logic.Pipeline
             {
                 // Empty user ID would create a bad session
                 // Empty session ID means 'create an arbitrary session ID' which is not the behaviour we want
-
-                JToken newSessionToken;
-                if (jsonPayload.TryGetValue("new-session", out newSessionToken))
-                {
-                    startNewSession = true;
-                }
+                startNewSession = true;
             }
 
             // We need to treat events that start a session specially
             if (startNewSession)
             {
                 // Implies that the user ID and session ID are valid (see code above)
+                // The data store should support starting the same session multiple times, so this should be OK
+                // It might be an improvement to avoid restarting sessions that we know are already running, but this depends on data store implementation
                 await dataStore.EventRecorder.StartSession(input.Organization(), input.Product(), userId, sessionId);
             }
 
