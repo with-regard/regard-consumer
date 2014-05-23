@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Diagnostics;
+using System.IO;
 using System.Net;
+using System.Text;
 using System.Threading;
 using Microsoft.ServiceBus;
 using Microsoft.ServiceBus.Messaging;
@@ -36,10 +38,16 @@ namespace Regard.Consumer.BusWorker
                     try
                     {
                         // Message data is a JSON string
-                        var rawMessage = receivedMessage.GetBody<string>();
+                        Stream rawMessage = receivedMessage.GetBody<Stream>();
 
-                        // Run through the pipeline
-                        var processedEvent = await m_EventPipeline.Process(RegardEvent.Create(rawMessage));
+                        IRegardEvent processedEvent;
+                        using (var memoryStream = new MemoryStream())
+                        {
+                            rawMessage.CopyTo(memoryStream);
+                            var body = Encoding.UTF8.GetString(memoryStream.ToArray());
+                            // Run through the pipeline
+                            processedEvent = await m_EventPipeline.Process(RegardEvent.Create(body));
+                        }
 
                         // Report any errors to the trace
                         if (processedEvent.Error() != null)
