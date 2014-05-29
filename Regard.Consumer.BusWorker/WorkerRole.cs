@@ -76,6 +76,9 @@ namespace Regard.Consumer.BusWorker
 
         public override bool OnStart()
         {
+            // We'll need some background threads to complete pending requests
+            ThreadPool.SetMaxThreads(40, 100);
+
             // Set the maximum number of concurrent connections 
             ServicePointManager.DefaultConnectionLimit = 12;
 
