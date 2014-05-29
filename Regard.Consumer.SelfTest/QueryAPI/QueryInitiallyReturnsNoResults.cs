@@ -32,9 +32,10 @@ namespace Regard.Consumer.SelfTest.QueryAPI
             Trace.WriteLine("QueryInitiallyReturnsNoResults: retrieved response: " + response.Item1);
 
             var resultObj = response.Item1;
+            JArray results = resultObj["Results"].Value<JArray>();
 
             // Should contain Results.EventCount = 0
-            if (resultObj["Results"][0]["EventCount"].Value<int>() != 0)
+            if (results.Count > 0 && results[0]["EventCount"].Value<int>() != 0)
             {
                 return JObject.FromObject(new {Error = "Should be no events"});
             }
