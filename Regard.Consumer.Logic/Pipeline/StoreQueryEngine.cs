@@ -195,7 +195,7 @@ namespace Regard.Consumer.Logic.Pipeline
 
             // Log this event
             // TODO: it's probably redundant to log the user info, session ID here so we could take it out of the logged payload
-            await dataStore.EventRecorder.RecordEvent(sessionId, input.Organization(), input.Product(), jsonPayload);
+            await dataStore.EventRecorder.RecordEvent(userId, sessionId, input.Organization(), input.Product(), jsonPayload);
 
             // We don't translate the event
             return input;
