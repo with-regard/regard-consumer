@@ -21,6 +21,7 @@
         <Bindings>
           <Binding name="Endpoint1" endpointName="Regard.Query.WebAPI" />
           <Binding name="Endpoint1" endpointName="Regard.Query.WebAPI.Public.Deleteme.Deleteme.Deleteme" />
+          <Binding name="Endpoint1" endpointName="Regard.Query.WebAPI.Public.SSL" />
         </Bindings>
       </Site>
     </Sites>
@@ -29,7 +30,8 @@
     </Imports>
     <Endpoints>
       <InternalEndpoint name="Regard.Query.WebAPI" protocol="http" port="8080" />
-      <InputEndpoint name="Regard.Query.WebAPI.Public.Deleteme.Deleteme.Deleteme" protocol="https" port="8888" />
+      <InputEndpoint name="Regard.Query.WebAPI.Public.Deleteme.Deleteme.Deleteme" protocol="http" port="8888" />
+      <InputEndpoint name="Regard.Query.WebAPI.Public.SSL" protocol="https" port="8889" />
     </Endpoints>
     <ConfigurationSettings>
       <Setting name="Regard.ServiceBus.ConnectionString" />
@@ -41,6 +43,8 @@
       <Setting name="Regard.Storage.SqlConnectionString" />
       <Setting name="Regard.HealthCheck.SharedSecret" />
     </ConfigurationSettings>
+    <Certificates>
+    </Certificates>
   </WebRole>
   <WebRole name="Regard.Consumer.SelfTest" vmsize="ExtraSmall">
     <Sites>

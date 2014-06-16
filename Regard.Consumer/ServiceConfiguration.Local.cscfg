@@ -27,6 +27,8 @@
       <Setting name="Regard.Storage.SqlConnectionString" value="" />
       <Setting name="Regard.HealthCheck.SharedSecret" value="[Secure random string]" />
     </ConfigurationSettings>
+    <Certificates>
+    </Certificates>
   </Role>
   <Role name="Regard.Consumer.SelfTest">
     <Instances count="1" />
