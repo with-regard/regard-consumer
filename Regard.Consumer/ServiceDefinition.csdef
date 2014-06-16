@@ -31,7 +31,7 @@
     <Endpoints>
       <InternalEndpoint name="Regard.Query.WebAPI" protocol="http" port="8080" />
       <InputEndpoint name="Regard.Query.WebAPI.Public.Deleteme.Deleteme.Deleteme" protocol="http" port="8888" />
-      <InputEndpoint name="Regard.Query.WebAPI.Public.SSL" protocol="https" port="8889" />
+      <InputEndpoint name="Regard.Query.WebAPI.Public.SSL" protocol="https" port="8889" certificate="RegardSSL" />
     </Endpoints>
     <ConfigurationSettings>
       <Setting name="Regard.ServiceBus.ConnectionString" />
