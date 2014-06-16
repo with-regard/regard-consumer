@@ -28,6 +28,7 @@
       <Setting name="Regard.HealthCheck.SharedSecret" value="[Secure random string]" />
     </ConfigurationSettings>
     <Certificates>
+      <Certificate name="RegardSSL" thumbprint="8420C0773626D5137A820156EB5BD9D6FDB9BEE9" thumbprintAlgorithm="sha1" />
     </Certificates>
   </Role>
   <Role name="Regard.Consumer.SelfTest">

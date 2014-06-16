@@ -44,6 +44,7 @@
       <Setting name="Regard.HealthCheck.SharedSecret" />
     </ConfigurationSettings>
     <Certificates>
+      <Certificate name="RegardSSL" storeLocation="LocalMachine" storeName="My" />
     </Certificates>
   </WebRole>
   <WebRole name="Regard.Consumer.SelfTest" vmsize="ExtraSmall">
