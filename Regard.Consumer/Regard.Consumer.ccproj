@@ -53,25 +53,13 @@
       <RoleName>Regard.Consumer.SelfTest</RoleName>
       <UpdateDiagnosticsConnectionStringOnPublish>True</UpdateDiagnosticsConnectionStringOnPublish>
     </ProjectReference>
-    <ProjectReference Include="..\Regard.Query.Internal.WebAPI\Regard.Query.Internal.WebAPI.csproj">
-      <Name>Regard.Query.Internal.WebAPI</Name>
-      <Project>{4bdddc1a-9fff-4947-a31f-d4ab0d8e2ef0}</Project>
-      <Private>True</Private>
-      <RoleType>Web</RoleType>
-      <RoleName>Regard.Query.Internal.WebAPI</RoleName>
-      <UpdateDiagnosticsConnectionStringOnPublish>True</UpdateDiagnosticsConnectionStringOnPublish>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Regard.Consumer.SelfTestContent\" />
-    <Folder Include="Regard.Query.Internal.WebAPIContent\" />
     <Folder Include="RegardConsumerRoleContent" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Regard.Consumer.SelfTestContent\diagnostics.wadcfg">
-      <SubType>Content</SubType>
-    </Content>
-    <Content Include="Regard.Query.Internal.WebAPIContent\diagnostics.wadcfg">
       <SubType>Content</SubType>
     </Content>
     <Content Include="RegardConsumerRoleContent\diagnostics.wadcfg">

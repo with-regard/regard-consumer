@@ -15,38 +15,6 @@
       <Setting name="Regard.HealthCheck.SharedSecret" />
     </ConfigurationSettings>
   </WorkerRole>
-  <WebRole name="Regard.Query.Internal.WebAPI" vmsize="Small">
-    <Sites>
-      <Site name="Web">
-        <Bindings>
-          <Binding name="Endpoint1" endpointName="Regard.Query.WebAPI" />
-          <Binding name="Endpoint1" endpointName="Regard.Query.WebAPI.Public.Deleteme.Deleteme.Deleteme" />
-          <Binding name="Endpoint1" endpointName="Regard.Query.WebAPI.Public.SSL" />
-        </Bindings>
-      </Site>
-    </Sites>
-    <Imports>
-      <Import moduleName="Diagnostics" />
-    </Imports>
-    <Endpoints>
-      <InternalEndpoint name="Regard.Query.WebAPI" protocol="http" port="8080" />
-      <InputEndpoint name="Regard.Query.WebAPI.Public.Deleteme.Deleteme.Deleteme" protocol="http" port="8888" />
-      <InputEndpoint name="Regard.Query.WebAPI.Public.SSL" protocol="https" port="8889" certificate="RegardSSL" />
-    </Endpoints>
-    <ConfigurationSettings>
-      <Setting name="Regard.ServiceBus.ConnectionString" />
-      <Setting name="Regard.ServiceBus.EventTopic" />
-      <Setting name="Regard.ServiceBus.SubscriptionName" />
-      <Setting name="Regard.Storage.ConnectionString" />
-      <Setting name="Regard.Storage.EventTable" />
-      <Setting name="Regard.Storage.CustomerTable" />
-      <Setting name="Regard.Storage.SqlConnectionString" />
-      <Setting name="Regard.HealthCheck.SharedSecret" />
-    </ConfigurationSettings>
-    <Certificates>
-      <Certificate name="RegardSSL" storeLocation="LocalMachine" storeName="My" />
-    </Certificates>
-  </WebRole>
   <WebRole name="Regard.Consumer.SelfTest" vmsize="ExtraSmall">
     <Sites>
       <Site name="Web">
