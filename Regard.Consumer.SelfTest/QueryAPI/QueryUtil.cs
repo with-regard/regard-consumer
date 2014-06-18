@@ -73,6 +73,11 @@ namespace Regard.Consumer.SelfTest.QueryAPI
 
             request.Method = verb;
 
+            // Ugh, apparently you need to manually encode the authentication details. At least it's not too tricky
+            string auth = QueryData.QueryEndPointUserName + ":" + QueryData.QueryEndPointPassword;
+            string headerAuth = Convert.ToBase64String(Encoding.Default.GetBytes(auth));
+            request.Headers["Authorization"] = "Basic " + headerAuth;
+
             if (data != null)
             {
                 // Generate the payload

@@ -29,5 +29,10 @@
     <Imports>
       <Import moduleName="Diagnostics" />
     </Imports>
+    <ConfigurationSettings>
+      <Setting name="Regard.Query.Endpoint"/>
+      <Setting name="Regard.Query.UserId"/>
+      <Setting name="Regard.Query.Password"/>
+    </ConfigurationSettings>
   </WebRole>
 </ServiceDefinition>

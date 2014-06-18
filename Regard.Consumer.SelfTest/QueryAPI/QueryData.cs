@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using Microsoft.WindowsAzure;
 using Microsoft.WindowsAzure.ServiceRuntime;
 
 namespace Regard.Consumer.SelfTest.QueryAPI
@@ -35,9 +36,25 @@ namespace Regard.Consumer.SelfTest.QueryAPI
         {
             get
             {
-                var endpoint = RoleEnvironment.Roles["Regard.Query.Internal.WebAPI"].Instances[0].InstanceEndpoints["Regard.Query.WebAPI"];
-                return "http://" + endpoint.IPEndpoint.Address + ":" + endpoint.IPEndpoint.Port;
+                var endpoint = CloudConfigurationManager.GetSetting("Regard.Query.Endpoint");
+                return endpoint;
             } 
+        }
+
+        public static string QueryEndPointUserName
+        {
+            get
+            {
+                return CloudConfigurationManager.GetSetting("Regard.Query.UserId");
+            }
+        }
+
+        public static string QueryEndPointPassword
+        {
+            get
+            {
+                return CloudConfigurationManager.GetSetting("Regard.Query.Password");
+            }
         }
 
         /// <summary>

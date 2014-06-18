@@ -18,6 +18,9 @@
     <Instances count="1" />
     <ConfigurationSettings>
       <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="UseDevelopmentStorage=true" />
+      <Setting name="Regard.Query.Endpoint" value="https://127.0.0.1:8888"/>
+      <Setting name="Regard.Query.UserId" value="[uid]"/>
+      <Setting name="Regard.Query.Password" value="[pass]"/>
     </ConfigurationSettings>
   </Role>
 </ServiceConfiguration>
