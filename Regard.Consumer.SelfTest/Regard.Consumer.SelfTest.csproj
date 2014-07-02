@@ -77,9 +77,9 @@
     <Reference Include="Owin">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
     </Reference>
-    <Reference Include="Regard.Query, Version=1.0.84.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Regard.Query, Version=1.0.85.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Regard.Query.1.0.84.0\lib\net45\Regard.Query.dll</HintPath>
+      <HintPath>..\packages\Regard.Query.1.0.85.0\lib\net45\Regard.Query.dll</HintPath>
     </Reference>
     <Reference Include="System.Data.Services.Client" />
     <Reference Include="System.Net.Http" />
