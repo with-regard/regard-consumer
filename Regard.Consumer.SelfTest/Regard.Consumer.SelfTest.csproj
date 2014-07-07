@@ -128,6 +128,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ITest.cs" />
+    <Compile Include="ITestStatusListener.cs" />
     <Compile Include="MultipleTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QueryAPI\CanCreateQuery.cs" />
@@ -138,6 +139,7 @@
     <Compile Include="QueryAPI\QueryInitiallyReturnsNoResults.cs" />
     <Compile Include="QueryAPI\QueryReturnsDataOnceThereAreMatchingEvents.cs" />
     <Compile Include="QueryAPI\QueryUtil.cs" />
+    <Compile Include="SlackTestStatusListener.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="TestController.cs" />
     <Compile Include="TestResults.cs" />

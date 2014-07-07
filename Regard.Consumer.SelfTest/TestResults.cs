@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 using Regard.Consumer.SelfTest.QueryAPI;
@@ -14,6 +15,11 @@ namespace Regard.Consumer.SelfTest
     {
         private static readonly ITest s_Tests;
         private static bool s_TestingInProgress;
+
+        private static readonly IEnumerable<ITestStatusListener> s_Listeners = new List<ITestStatusListener>
+                                                                               {
+                                                                                   new SlackTestStatusListener()
+                                                                               };
 
         static TestResults()
         {
@@ -36,8 +42,10 @@ namespace Regard.Consumer.SelfTest
             var result = await RunTestsInBackground();
 
             s_TestingInProgress = false;
-
+            
             Results.Add(result);
+
+            Task.WaitAll(s_Listeners.Select(x => x.TestsFinished(result)).ToArray());
         }
 
         /// <summary>
