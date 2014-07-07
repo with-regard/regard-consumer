@@ -3,7 +3,7 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
-using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace Regard.Consumer.SelfTest
 {
@@ -19,14 +19,14 @@ namespace Regard.Consumer.SelfTest
 
             if (results.Any())
             {
-                return Request.CreateResponse(HttpStatusCode.OK, JsonConvert.SerializeObject(results));
+                return Request.CreateResponse(HttpStatusCode.OK, JObject.FromObject(results));
             }
             else
             {
-                return Request.CreateResponse(HttpStatusCode.OK, JsonConvert.SerializeObject(new
-                                                                                             {
-                                                                                                 Status = "Tests not finished yet"
-                                                                                             }));
+                return Request.CreateResponse(HttpStatusCode.OK, JObject.FromObject(new
+                                                                                    {
+                                                                                        Status = "Tests not finished yet"
+                                                                                    }));
             }
         }
     }
