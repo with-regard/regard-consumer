@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
@@ -13,10 +14,13 @@ namespace Regard.Consumer.SelfTest
         {
             using (var httpClient = new HttpClient())
             {
-                await httpClient.PostAsync(c_SlackUrl, new StringContent(JsonConvert.SerializeObject(new
-                                                                                                     {
-                                                                                                         text = results
-                                                                                                     })));
+                var httpResponseMessage = await httpClient.PostAsync(c_SlackUrl, new StringContent(JsonConvert.SerializeObject(new
+                                                                                                                               {
+                                                                                                                                   text = results
+                                                                                                                               })));
+
+                if (!httpResponseMessage.IsSuccessStatusCode)
+                    Trace.TraceWarning("Unable to send the message to the Slack API. " + httpResponseMessage.RequestMessage);
             }
         }
     }
