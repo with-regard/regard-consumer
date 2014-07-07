@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 using System.Web.Http;
 using Owin;
 
@@ -13,6 +14,8 @@ namespace Regard.Consumer.SelfTest
     /// </remarks>
     public class Startup
     {
+        private Timer m_Timer;
+
         public void Configuration(IAppBuilder app)
         {
             // Set up a small thread pool
@@ -34,7 +37,7 @@ namespace Regard.Consumer.SelfTest
             app.UseWebApi(httpConfiguration);
 
             // Start the tests running in the background
-            TestResults.RunTests();
+            m_Timer = new Timer(x => TestResults.RunTests(), null, 0, TimeSpan.FromMinutes(30).Milliseconds);
 
             app.Run(async context =>
             {

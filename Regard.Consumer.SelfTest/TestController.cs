@@ -1,9 +1,9 @@
-﻿using System.Net;
+﻿using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
-using Newtonsoft.Json.Linq;
-using Regard.Consumer.SelfTest.QueryAPI;
+using Newtonsoft.Json;
 
 namespace Regard.Consumer.SelfTest
 {
@@ -15,7 +15,19 @@ namespace Regard.Consumer.SelfTest
         [HttpGet, Route("test-results")]
         public async Task<HttpResponseMessage> TestResults()
         {
-            return Request.CreateResponse(HttpStatusCode.OK, SelfTest.TestResults.Results);
+            var results = SelfTest.TestResults.Results;
+
+            if (results.Any())
+            {
+                return Request.CreateResponse(HttpStatusCode.OK, JsonConvert.SerializeObject(results));
+            }
+            else
+            {
+                return Request.CreateResponse(HttpStatusCode.OK, JsonConvert.SerializeObject(new
+                                                                                             {
+                                                                                                 Status = "Tests not finished yet"
+                                                                                             }));
+            }
         }
     }
 }
