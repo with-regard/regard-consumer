@@ -1,3 +1,4 @@
+using System;
 using System.Diagnostics;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -20,7 +21,9 @@ namespace Regard.Consumer.SelfTest
                                                                                                                                })));
 
                 if (!httpResponseMessage.IsSuccessStatusCode)
-                    Trace.TraceWarning("Unable to send the message to the Slack API. " + httpResponseMessage.RequestMessage);
+                    Trace.TraceWarning(String.Format("Unable to post to the Slack API \n {0} \n\n {1} \n\n {2}", httpResponseMessage.ReasonPhrase, httpResponseMessage.StatusCode, httpResponseMessage.Content));
+
+                
             }
         }
     }
