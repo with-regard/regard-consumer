@@ -19,7 +19,7 @@ namespace Regard.Consumer.SelfTest
 
             if (results.Any())
             {
-                return Request.CreateResponse(HttpStatusCode.OK, JObject.FromObject(results));
+                return Request.CreateResponse(HttpStatusCode.OK, JObject.FromObject(new JArray(results.ToArray())));
             }
             else
             {
