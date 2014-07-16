@@ -1,9 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 using Microsoft.ServiceBus;
 using Microsoft.ServiceBus.Messaging;
 using Microsoft.WindowsAzure;
@@ -17,11 +20,10 @@ namespace Regard.Consumer.BusWorker
 {
     public class WorkerRole : RoleEntryPoint
     {
-        // The name of your queue
-        const string QueueName = "ProcessingQueue";
-
-        SubscriptionClient Client;
-        ManualResetEvent CompletedEvent = new ManualResetEvent(false);
+        const string c_QueueName = "ProcessingQueue";
+        private const int c_BatchSize = 20;
+        private SubscriptionClient Client;
+        private readonly ManualResetEvent CompletedEvent = new ManualResetEvent(false);
 
         /// <summary>
         /// The event processing pipeline
@@ -32,46 +34,65 @@ namespace Regard.Consumer.BusWorker
         {
             Trace.WriteLine("Starting processing of messages");
 
-            // Initiates the message pump and callback is invoked for each message that is received, calling close on the client will stop the pump.
-            Client.OnMessageAsync(async (receivedMessage) =>
+            try
+            {
+                while (!CompletedEvent.WaitOne(0))                  // CompletedEvent gets signalled when it's time to finish
                 {
-                    try
+                    var messages = Client.ReceiveBatch(c_BatchSize, TimeSpan.FromSeconds(5)).ToList();
+                    if (messages.Count > 0)
                     {
-                        // Message data is a JSON string
-                        Stream rawMessage = receivedMessage.GetBody<Stream>();
-
-                        IRegardEvent processedEvent;
-                        using (var memoryStream = new MemoryStream())
+                        // Process the messages
+                        Task.Run(async () =>
                         {
-                            rawMessage.CopyTo(memoryStream);
-                            var body = Encoding.UTF8.GetString(memoryStream.ToArray());
-                            // Run through the pipeline
-                            processedEvent = await m_EventPipeline.Process(RegardEvent.Create(body));
-                        }
+                            var completedMessageLockTokens = new List<Guid>();
+                            foreach (var receivedMessage in messages)
+                            {
+                                try
+                                {
+                                    // Message data is a JSON string
+                                    Stream rawMessage = receivedMessage.GetBody<Stream>();
 
-                        // Report any errors to the trace
-                        if (processedEvent.Error() != null)
-                        {
-                            // TODO: protect against bad event spamming
-                            // Not clear how we want to do this at the moment. The endpoint should probably reject these events to stop them
-                            // occupying too many resources, so this part should probably send a message back when it wants a source to be
-                            // rejected.
-                            Trace.TraceError("Rejected event: {0}", processedEvent.Error());
-                        }
+                                    IRegardEvent processedEvent;
+                                    using (var memoryStream = new MemoryStream())
+                                    {
+                                        rawMessage.CopyTo(memoryStream);
+                                        var body = Encoding.UTF8.GetString(memoryStream.ToArray());
+                                        // Run through the pipeline
+                                        processedEvent = await m_EventPipeline.Process(RegardEvent.Create(body));
+                                    }
 
-                        // Complete the message
-                        await receivedMessage.CompleteAsync();
+                                    // Report any errors to the trace
+                                    if (processedEvent.Error() != null)
+                                    {
+                                        // TODO: protect against bad event spamming
+                                        // Not clear how we want to do this at the moment. The endpoint should probably reject these events to stop them
+                                        // occupying too many resources, so this part should probably send a message back when it wants a source to be
+                                        // rejected.
+                                        Trace.TraceError("Rejected event: {0}", processedEvent.Error());
+                                    }
+
+                                    // Complete the message
+                                    completedMessageLockTokens.Add(receivedMessage.LockToken);
+                                }
+                                catch (Exception e)
+                                {
+                                    // Handle any message processing specific exceptions here
+                                    Trace.TraceError("Exception during event processing: {0}", e.Message);
+
+                                    // TODO: the endpoint should timeout or reject any event source that causes an exception here in order to maintain quality of service
+                                }
+                            }
+
+                            // Mark these messages as completed
+                            Client.CompleteBatch(completedMessageLockTokens);
+                        }).Wait();
                     }
-                    catch (Exception e)
-                    {
-                        // Handle any message processing specific exceptions here
-                        Trace.TraceError("Exception during event processing: {0}", e.Message);
-
-                        // TODO: the endpoint should timeout or reject any event source that causes an exception here in order to maintain quality of service
-                    }
-                });
-
-            CompletedEvent.WaitOne();
+                }
+            }
+            catch (Exception e)
+            {
+                Trace.TraceError("Fatal error while processing messages", e);
+            }
         }
 
         public override bool OnStart()
