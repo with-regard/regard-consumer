@@ -68,6 +68,7 @@
     <Compile Include="Api\IFlatTableTarget.cs" />
     <Compile Include="Api\IPipeline.cs" />
     <Compile Include="Api\IPipelineStage.cs" />
+    <Compile Include="Api\IQueryNotifier.cs" />
     <Compile Include="Api\IRegardEvent.cs" />
     <Compile Include="Data\AzureFlatTableTarget.cs" />
     <Compile Include="Data\FlatEventEntity.cs" />
@@ -81,6 +82,7 @@
     <Compile Include="Pipeline\AzureTablePipeline.cs" />
     <Compile Include="Pipeline\DefaultDataStorePipeline.cs" />
     <Compile Include="Pipeline\HealthCheckRoutingStage.cs" />
+    <Compile Include="Pipeline\NotifyEventStage.cs" />
     <Compile Include="Pipeline\ProcessPipeline.cs" />
     <Compile Include="Pipeline\SimplePipeline.cs" />
     <Compile Include="Pipeline\StoreAzureTable.cs" />
