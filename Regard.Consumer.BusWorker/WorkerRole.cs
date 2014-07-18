@@ -118,8 +118,18 @@ namespace Regard.Consumer.BusWorker
             var eventTable                  = new AzureFlatTableTarget(storageConnectionString, eventTableName);
             var customerTable               = new AzureFlatTableTarget(storageConnectionString, customerTableName);
 
+            // Create the query notifier
+            string queryServiceBusConnectionString  = CloudConfigurationManager.GetSetting("Regard.ServiceBus.QueryUpdate.ConnectionString");
+            string queryEventTopic                  = CloudConfigurationManager.GetSetting("Regard.ServiceBus.QueryUpdate.EventTopic");
+
+            QueryNotifier queryNotifier = null;
+            if (!string.IsNullOrEmpty(queryServiceBusConnectionString) && !string.IsNullOrEmpty(queryEventTopic))
+            {
+                queryNotifier = new QueryNotifier(queryServiceBusConnectionString, queryEventTopic);
+            }
+
             // For now we're just storing the data in the table
-            m_EventPipeline = new DefaultDataStorePipeline(eventTable, customerTable, null, healthCheckSecret);
+            m_EventPipeline = new DefaultDataStorePipeline(eventTable, customerTable, queryNotifier, healthCheckSecret);
 
             // Create the queue if it does not exist already
             string serviceBusConnectionString   = CloudConfigurationManager.GetSetting("Regard.ServiceBus.ConnectionString");

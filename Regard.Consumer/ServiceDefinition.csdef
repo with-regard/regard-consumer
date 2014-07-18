@@ -15,7 +15,6 @@
       <Setting name="Regard.HealthCheck.SharedSecret" />
       <Setting name="Regard.ServiceBus.QueryUpdate.ConnectionString" />
       <Setting name="Regard.ServiceBus.QueryUpdate.EventTopic" />
-      <Setting name="Regard.ServiceBus.QueryUpdate.Subscription" />
     </ConfigurationSettings>
   </WorkerRole>
   <WebRole name="Regard.Consumer.SelfTest" vmsize="ExtraSmall">
