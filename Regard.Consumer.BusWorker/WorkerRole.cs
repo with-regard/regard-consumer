@@ -119,7 +119,7 @@ namespace Regard.Consumer.BusWorker
             var customerTable               = new AzureFlatTableTarget(storageConnectionString, customerTableName);
 
             // For now we're just storing the data in the table
-            m_EventPipeline = new DefaultDataStorePipeline(eventTable, customerTable, healthCheckSecret);
+            m_EventPipeline = new DefaultDataStorePipeline(eventTable, customerTable, null, healthCheckSecret);
 
             // Create the queue if it does not exist already
             string serviceBusConnectionString   = CloudConfigurationManager.GetSetting("Regard.ServiceBus.ConnectionString");
