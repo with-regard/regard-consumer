@@ -12,6 +12,9 @@
       <Setting name="Regard.Storage.CustomerTable" value="customers" />
       <Setting name="Regard.Storage.SqlConnectionString" value="" />
       <Setting name="Regard.HealthCheck.SharedSecret" value="[Secure random string]" />
+      <Setting name="Regard.ServiceBus.QueryUpdate.ConnectionString" value=""/>
+      <Setting name="Regard.ServiceBus.QueryUpdate.EventTopic" value=""/>
+      <Setting name="Regard.ServiceBus.QueryUpdate.Subscription" value=""/>
     </ConfigurationSettings>
   </Role>
   <Role name="Regard.Consumer.SelfTest">
