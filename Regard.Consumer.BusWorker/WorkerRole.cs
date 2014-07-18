@@ -90,7 +90,10 @@ namespace Regard.Consumer.BusWorker
                             }
 
                             // Mark these messages as completed
-                            m_Client.CompleteBatch(completedMessageLockTokens);
+                            if (completedMessageLockTokens.Count > 0)
+                            {
+                                m_Client.CompleteBatch(completedMessageLockTokens);
+                            }
                         }).Wait();
                     }
                 }
