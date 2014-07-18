@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.ServiceBus;
 using Microsoft.ServiceBus.Messaging;
 using Newtonsoft.Json.Linq;
+using Regard.Consumer.Logic.Api;
 
 namespace Regard.Consumer.BusWorker
 {
@@ -21,7 +22,7 @@ namespace Regard.Consumer.BusWorker
     /// highly unlikely that any one product will ever generate enough events to require multiple nodes to handle the
     /// ingest.
     /// </remarks>
-    public class QueryNotifier
+    public class QueryNotifier : IQueryNotifier
     {
         private readonly object m_Sync = new object();
 
