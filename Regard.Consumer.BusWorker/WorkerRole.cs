@@ -22,8 +22,9 @@ namespace Regard.Consumer.BusWorker
     {
         const string c_QueueName = "ProcessingQueue";
         private const int c_BatchSize = 20;
-        private SubscriptionClient Client;
-        private readonly ManualResetEvent CompletedEvent = new ManualResetEvent(false);
+        private SubscriptionClient m_Client;
+        private readonly ManualResetEvent m_CompletedEvent = new ManualResetEvent(false);
+        private QueryNotifier m_Notifier;
 
         /// <summary>
         /// The event processing pipeline
@@ -34,11 +35,16 @@ namespace Regard.Consumer.BusWorker
         {
             Trace.WriteLine("Starting processing of messages");
 
+            if (m_Notifier == null)
+            {
+                Trace.TraceWarning("No query notifier is available: queries may run slowly");
+            }
+
             try
             {
-                while (!CompletedEvent.WaitOne(0))                  // CompletedEvent gets signalled when it's time to finish
+                while (!m_CompletedEvent.WaitOne(0))                  // CompletedEvent gets signalled when it's time to finish
                 {
-                    var messages = Client.ReceiveBatch(c_BatchSize, TimeSpan.FromSeconds(5)).ToList();
+                    var messages = m_Client.ReceiveBatch(c_BatchSize, TimeSpan.FromSeconds(5)).ToList();
                     if (messages.Count > 0)
                     {
                         // Process the messages
@@ -84,7 +90,7 @@ namespace Regard.Consumer.BusWorker
                             }
 
                             // Mark these messages as completed
-                            Client.CompleteBatch(completedMessageLockTokens);
+                            m_Client.CompleteBatch(completedMessageLockTokens);
                         }).Wait();
                     }
                 }
@@ -112,8 +118,18 @@ namespace Regard.Consumer.BusWorker
             var eventTable                  = new AzureFlatTableTarget(storageConnectionString, eventTableName);
             var customerTable               = new AzureFlatTableTarget(storageConnectionString, customerTableName);
 
+            // Create the query notifier
+            string queryServiceBusConnectionString  = CloudConfigurationManager.GetSetting("Regard.ServiceBus.QueryUpdate.ConnectionString");
+            string queryEventTopic                  = CloudConfigurationManager.GetSetting("Regard.ServiceBus.QueryUpdate.EventTopic");
+
+            QueryNotifier queryNotifier = null;
+            if (!string.IsNullOrEmpty(queryServiceBusConnectionString) && !string.IsNullOrEmpty(queryEventTopic))
+            {
+                queryNotifier = new QueryNotifier(queryServiceBusConnectionString, queryEventTopic);
+            }
+
             // For now we're just storing the data in the table
-            m_EventPipeline = new DefaultDataStorePipeline(eventTable, customerTable, healthCheckSecret);
+            m_EventPipeline = new DefaultDataStorePipeline(eventTable, customerTable, queryNotifier, healthCheckSecret);
 
             // Create the queue if it does not exist already
             string serviceBusConnectionString   = CloudConfigurationManager.GetSetting("Regard.ServiceBus.ConnectionString");
@@ -134,15 +150,15 @@ namespace Regard.Consumer.BusWorker
             SubscriptionClient subscriptionClient = SubscriptionClient.CreateFromConnectionString(serviceBusConnectionString, topic, subscriptionName);
 
             // Initialize the connection to Service Bus Queue
-            Client = subscriptionClient;
+            m_Client = subscriptionClient;
             return base.OnStart();
         }
 
         public override void OnStop()
         {
             // Close the connection to Service Bus Queue
-            Client.Close();
-            CompletedEvent.Set();
+            m_Client.Close();
+            m_CompletedEvent.Set();
             base.OnStop();
         }
     }

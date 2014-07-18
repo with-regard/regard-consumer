@@ -13,7 +13,7 @@ namespace Regard.Consumer.Logic.Pipeline
         /// <summary>
         /// Creates a new table pipeline
         /// </summary>
-        public DefaultDataStorePipeline(IFlatTableTarget eventTable, IFlatTableTarget customerTable, string healthCheckSecret)
+        public DefaultDataStorePipeline(IFlatTableTarget eventTable, IFlatTableTarget customerTable, IQueryNotifier notifier, string healthCheckSecret)
         {
             var decompose       = new DecomposeStage();
             var checkSize       = new CheckDataSize();
@@ -24,8 +24,9 @@ namespace Regard.Consumer.Logic.Pipeline
             var healthCheck     = new HealthCheckRoutingStage(healthCheckSecret);
             var storeInTable    = new StoreAzureTable(eventTable);
             var storeForQuery   = new StoreQueryEngine();
+            var notify          = new NotifyEventStage(notifier);
 
-            m_Stages = new IPipelineStage[] { decompose, checkSize, checkOrg, checkProduct, checkUser, checkEvent, healthCheck, storeInTable, storeForQuery };
+            m_Stages = new IPipelineStage[] { decompose, checkSize, checkOrg, checkProduct, checkUser, checkEvent, healthCheck, storeInTable, storeForQuery, notify };
         }
 
         /// <summary>

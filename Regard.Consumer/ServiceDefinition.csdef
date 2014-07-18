@@ -13,6 +13,8 @@
       <Setting name="Regard.Storage.CustomerTable" />
       <Setting name="Regard.Storage.SqlConnectionString" />
       <Setting name="Regard.HealthCheck.SharedSecret" />
+      <Setting name="Regard.ServiceBus.QueryUpdate.ConnectionString" />
+      <Setting name="Regard.ServiceBus.QueryUpdate.EventTopic" />
     </ConfigurationSettings>
   </WorkerRole>
   <WebRole name="Regard.Consumer.SelfTest" vmsize="ExtraSmall">
