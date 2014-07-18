@@ -100,10 +100,8 @@ namespace Regard.Consumer.BusWorker
             byte[] buffer = Encoding.UTF8.GetBytes(stringMessage);
 
             // Send
-            using (var encodedStream = new MemoryStream(buffer, 0, buffer.Length))
-            {
-                await m_NotificationTopic.SendAsync(new BrokeredMessage(encodedStream));
-            }
+            var encodedStream = new MemoryStream(buffer, 0, buffer.Length, false, true);
+            await m_NotificationTopic.SendAsync(new BrokeredMessage(encodedStream, true));
         }
     }
 }
